@@ -1,0 +1,65 @@
+@use "variables" as *;
+
+@mixin txt-prst-1 {
+  font-family: $font-primary;
+  font-size: $font-5xl;
+  font-weight: $font-semibold;
+  letter-spacing: -2px;
+  line-height: $lh-standard;
+}
+
+@mixin txt-prst-2 {
+  font-family: $font-secondary;
+  font-size: $font-4xl;
+  font-weight: $font-bold;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-3 {
+  font-family: $font-primary;
+  font-size: $font-3xl;
+  font-weight: $font-light;
+  line-height: $lh-standard;
+}
+
+@mixin txt-prst-4 {
+  font-family: $font-primary;
+  font-size: $font-2xl;
+  font-weight: $font-bold;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-5sb {
+  font-family: $font-primary;
+  font-size: $font-xl;
+  font-weight: $font-semibold;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-5m {
+  font-family: $font-primary;
+  font-size: $font-xl;
+  font-weight: $font-medium;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-6 {
+  font-family: $font-primary;
+  font-size: $font-lg;
+  font-weight: $font-medium;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-7 {
+  font-family: $font-primary;
+  font-size: $font-base;
+  font-weight: $font-medium;
+  line-height: $lh-loose;
+}
+
+@mixin txt-prst-7 {
+  font-family: $font-primary;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  line-height: $lh-loose;
+}
