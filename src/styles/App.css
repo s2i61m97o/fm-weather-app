@@ -1,2 +1,3 @@
-@import "./styles/tokens.css";
-@import "./styles/reset.css";
+body {
+  min-height: 100vh;
+}

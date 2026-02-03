@@ -66,3 +66,11 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+button {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}

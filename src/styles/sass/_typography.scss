@@ -50,14 +50,14 @@
   line-height: $lh-loose;
 }
 
-@mixin txt-prst-7 {
+@mixin dropdown {
   font-family: $font-primary;
   font-size: $font-base;
   font-weight: $font-medium;
   line-height: $lh-loose;
 }
 
-@mixin txt-prst-7 {
+@mixin dropdownTitle {
   font-family: $font-primary;
   font-size: $font-sm;
   font-weight: $font-medium;

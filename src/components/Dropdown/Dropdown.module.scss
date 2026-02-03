@@ -1,0 +1,74 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown__content {
+  box-sizing: border-box;
+  background-color: v.$neutral-800;
+  top: calc(100% + v.$sp-025);
+  border-radius: v.$r-12;
+  color: v.$neutral-0;
+  display: grid;
+  height: 0;
+  min-width: max-content;
+  overflow: hidden;
+  right: 0;
+  padding: 0;
+  position: absolute;
+  @include t.dropdown;
+  transition:
+    padding 1ms linear 350ms,
+    height 350ms ease-in;
+}
+
+.dropdown__contentOpen {
+  height: fit-content;
+  padding: v.$sp-015 v.$sp-02;
+  transform: translateY(0);
+  transition:
+    padding 1ms linear,
+    height 350ms ease-in;
+}
+
+.dropdown__button {
+  background-color: v.$neutral-800;
+  border-radius: v.$r-6;
+  color: v.$neutral-0;
+  display: flex;
+  flex-direction: row;
+  gap: v.$sp-01;
+  padding: v.$sp-02 v.$sp-025;
+  @include t.dropdown;
+}
+
+.dropdown__title {
+  padding: v.$sp-025 v.$sp-02;
+}
+
+.dropdown__groupTitle {
+  color: v.$neutral-300;
+  padding: v.$sp-015 v.$sp-02;
+  text-transform: capitalize;
+  @include t.dropdownTitle;
+}
+
+.dropdown__group {
+  margin-block: v.$sp-01;
+}
+
+.dropdown__groupItems {
+  display: grid;
+  gap: v.$sp-01;
+  justify-items: start;
+}
+
+.dropdown__item {
+  border-radius: v.$r-8;
+  padding: v.$sp-025 v.$sp-02;
+  text-align: left;
+  width: 100%;
+}

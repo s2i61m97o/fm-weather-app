@@ -1,7 +1,8 @@
-import "./App.css";
+import "./styles/App.css";
+import Header from "./sections/Header/Header";
 
 function App() {
-  return <h1>Weather App</h1>;
+  return <Header />;
 }
 
 export default App;
