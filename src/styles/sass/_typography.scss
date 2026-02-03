@@ -59,7 +59,7 @@
 
 @mixin dropdownTitle {
   font-family: $font-primary;
-  font-size: $font-sm;
+  font-size: clamp($font-sm, 0.7557rem + 0.5089vw, $font-base);
   font-weight: $font-medium;
   line-height: $lh-loose;
 }

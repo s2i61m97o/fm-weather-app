@@ -6,7 +6,7 @@ import styles from "./Header.module.scss";
 export default function Header() {
   return (
     <header className={styles.header}>
-      <img src={logo} alt="Weather Now Logo" />
+      <img className={styles.header__logo} src={logo} alt="Weather Now Logo" />
       <div>
         <Dropdown>
           <Dropdown.Button icon={<img src={unitsIcon} />} arrow>
@@ -18,12 +18,12 @@ export default function Header() {
               <Dropdown.Item>Celsius (˚C)</Dropdown.Item>
               <Dropdown.Item>Fahrenheit (˚F)</Dropdown.Item>
             </Dropdown.Group>
-            <hr />
+            <hr className={styles.header__divider} />
             <Dropdown.Group title="wind speed">
               <Dropdown.Item>km /h</Dropdown.Item>
               <Dropdown.Item>mph</Dropdown.Item>
             </Dropdown.Group>
-            <hr />
+            <hr className={styles.header__divider} />
             <Dropdown.Group title="precipitation">
               <Dropdown.Item>Millimetres (mm)</Dropdown.Item>
               <Dropdown.Item>Inches (in)</Dropdown.Item>

@@ -3,7 +3,19 @@
 @use "../../styles/sass/typography" as t;
 
 .header {
+  align-items: center;
   display: flex;
-  justify-content: space-around;
-  margin: v.$sp-06;
+  justify-content: space-between;
+  margin: clamp(v.$sp-04, 0.5229rem + 2.0356vw, v.$sp-06);
+  @include mq.md {
+    margin: clamp(v.$sp-06, -0.2143rem + 3.5714vw, v.$sp-12)
+      clamp(v.$sp-06, -4.7857rem + 13.0952vw, v.$sp-28);
+  }
+}
+.header__logo {
+  width: clamp(v.$sp-35, 5.1718rem + 15.2672vw, 12.5rem);
+}
+
+.header__divider {
+  border: solid 1px v.$neutral-600;
 }
