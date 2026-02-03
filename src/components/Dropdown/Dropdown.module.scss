@@ -19,6 +19,7 @@
   right: 0;
   padding: 0;
   position: absolute;
+  z-index: 100;
   @include t.dropdown;
   transition:
     padding 1ms linear 350ms,

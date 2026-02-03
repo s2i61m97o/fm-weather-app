@@ -8,7 +8,7 @@
   line-height: $lh-standard;
 }
 
-@mixin txt-prst-2 {
+@mixin header {
   font-family: $font-secondary;
   font-size: $font-4xl;
   font-weight: $font-bold;
@@ -36,7 +36,7 @@
   line-height: $lh-loose;
 }
 
-@mixin txt-prst-5m {
+@mixin input {
   font-family: $font-primary;
   font-size: $font-xl;
   font-weight: $font-medium;

@@ -1,0 +1,69 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.search {
+  text-align: center;
+}
+
+.search__header {
+  color: v.$neutral-0;
+  margin-block: clamp(v.$sp-12, 1.8571rem + 2.381vw, v.$sp-16);
+  margin-inline: auto;
+  max-width: 600px;
+  @include t.header;
+  @include mq.lg {
+    max-width: fit-content;
+  }
+}
+
+.search__form {
+  display: grid;
+  gap: v.$sp-03;
+  max-width: 656px;
+  margin-inline: auto;
+  @include t.input;
+  @include mq.md {
+    grid-template-columns: auto max-content;
+  }
+}
+
+.search__wrapper {
+  position: relative;
+  &::before {
+    content: url(images/icon-search.svg);
+    color: v.$neutral-200;
+    position: absolute;
+    top: v.$sp-045;
+    left: v.$sp-06;
+    z-index: 1;
+  }
+}
+
+.search__input {
+  background-color: v.$neutral-800;
+  border: none;
+  border-radius: v.$r-12;
+  color: v.$neutral-0;
+  cursor: pointer;
+  padding-inline-start: v.$sp-16;
+  padding-block: v.$sp-04;
+  position: relative;
+  width: 100%;
+
+  &::placeholder {
+    color: v.$neutral-200;
+  }
+}
+
+.search__button {
+  background-color: v.$blue-500;
+  border-radius: v.$r-12;
+  color: v.$neutral-0;
+  cursor: pointer;
+  padding: v.$sp-04;
+
+  &:hover {
+    background-color: v.$blue-700;
+  }
+}
