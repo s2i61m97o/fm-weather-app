@@ -12,7 +12,11 @@ const DropdownContext = createContext<DropdownContextType>({
   setOpen: () => {},
 });
 
-export default function Dropdown({children}: {children: JSX.Element[]}) {
+export default function Dropdown({
+  children,
+}: {
+  children: JSX.Element[] | JSX.Element;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <DropdownContext.Provider value={{open, setOpen}}>
