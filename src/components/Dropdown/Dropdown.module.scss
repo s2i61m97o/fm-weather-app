@@ -14,12 +14,13 @@
   color: v.$neutral-0;
   display: grid;
   height: 0;
+  max-width: 100%;
   min-width: max-content;
-  width: 100%;
   overflow: hidden;
   right: 0;
   padding: 0;
   position: absolute;
+  width: 100%;
   z-index: 100;
   @include t.dropdown;
   transition:
@@ -72,6 +73,8 @@
 
 .dropdown__item {
   border-radius: v.$r-8;
+  display: flex;
+  gap: v.$sp-025;
   padding: v.$sp-025 v.$sp-02;
   text-align: left;
   width: 100%;

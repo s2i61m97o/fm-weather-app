@@ -23,12 +23,17 @@ export default function Search() {
             placeholder="Search for a place"
           />
           <Dropdown.Content>
-            {locations &&
+            {locations.length >= 1 ? (
               locations.map((location: Location) => (
                 <Dropdown.Item
                   key={location.id}
                 >{`${location.name}, ${location.state}, ${location.country}`}</Dropdown.Item>
-              ))}
+              ))
+            ) : (
+              <Dropdown.Item icon="loading">
+                Search in progress...
+              </Dropdown.Item>
+            )}
           </Dropdown.Content>
         </Dropdown>
         <button className={styles.search__button}>Search</button>
