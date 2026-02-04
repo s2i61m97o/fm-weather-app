@@ -4,5 +4,5 @@ export type Location = {
   lat: number;
   long: number;
   country: string;
-  state: string;
+  admin1: string;
 };

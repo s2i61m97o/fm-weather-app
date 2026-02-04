@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import type {ChangeEvent} from "react";
 import {DropdownContext} from "./Dropdown";
 import styles from "./Dropdown.module.scss";
@@ -6,9 +6,13 @@ import styles from "./Dropdown.module.scss";
 export default function DropdownSearch({
   onchange,
   placeholder,
+  value,
+  selected,
 }: {
   onchange: (e: ChangeEvent<HTMLInputElement>) => Promise<void>;
   placeholder: string;
+  value: string;
+  selected: boolean;
 }) {
   const {setOpen} = useContext(DropdownContext);
 
@@ -21,6 +25,12 @@ export default function DropdownSearch({
     }
   }
 
+  useEffect(() => {
+    if (selected) {
+      setOpen(false);
+    }
+  }, [selected, setOpen]);
+
   return (
     <div className={styles.dropdown__search}>
       <input
@@ -28,6 +38,7 @@ export default function DropdownSearch({
         className={styles.dropdown__input}
         placeholder={placeholder}
         onChange={handleChange}
+        value={value}
       />
     </div>
   );
