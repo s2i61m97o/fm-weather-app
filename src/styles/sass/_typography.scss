@@ -1,6 +1,6 @@
 @use "variables" as *;
 
-@mixin txt-prst-1 {
+@mixin currentTemp {
   font-family: $font-primary;
   font-size: $font-5xl;
   font-weight: $font-semibold;
@@ -22,7 +22,7 @@
   line-height: $lh-standard;
 }
 
-@mixin txt-prst-4 {
+@mixin location {
   font-family: $font-primary;
   font-size: $font-2xl;
   font-weight: $font-bold;
@@ -43,7 +43,7 @@
   line-height: $lh-loose;
 }
 
-@mixin txt-prst-6 {
+@mixin date {
   font-family: $font-primary;
   font-size: $font-lg;
   font-weight: $font-medium;

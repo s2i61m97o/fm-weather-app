@@ -1,0 +1,47 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.forecast {
+  color: v.$neutral-0;
+  margin-block: v.$sp-08;
+}
+
+.forecast__weatherInfo {
+  background-image: url(images/bg-today-small.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: v.$r-20;
+  padding: v.$sp-06;
+  text-align: center;
+
+  @include mq.sm {
+    background-image: url(images/bg-today-large.svg);
+  }
+
+  h2 {
+    margin-block: v.$sp-03;
+    @include t.location;
+  }
+
+  p {
+    @include t.date;
+  }
+}
+
+.forecast__temp {
+  align-items: center;
+  display: flex;
+  //   gap: v.$sp-05;
+  justify-content: space-around;
+  margin-block: v.$sp-04;
+
+  p {
+    @include t.currentTemp;
+  }
+}
+
+.forecast__icon {
+  height: 120px;
+  width: 120px;
+}
