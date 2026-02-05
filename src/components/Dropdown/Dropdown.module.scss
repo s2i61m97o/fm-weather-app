@@ -13,19 +13,34 @@
   border-radius: v.$r-12;
   color: v.$neutral-0;
   display: grid;
+  gap: v.$sp-01;
   height: 0;
+  justify-items: start;
   max-width: 100%;
   min-width: min-content;
   overflow: hidden;
   right: 0;
   padding: 0;
   position: absolute;
+  text-wrap: nowrap;
   width: 100%;
   z-index: 100;
-  @include t.dropdown;
   transition:
     padding 1ms linear 350ms,
     height 350ms ease-in;
+
+  button {
+    cursor: pointer;
+    padding: v.$sp-025 v.$sp-02;
+    @include t.button;
+  }
+
+  .dropdown__title {
+    color: v.$neutral-300;
+    padding: v.$sp-015 v.$sp-02;
+    text-transform: capitalize;
+    @include t.dropdownTitle;
+  }
 }
 
 .dropdown__contentOpen {
@@ -37,29 +52,6 @@
     height 350ms ease-in;
 }
 
-.dropdown__button {
-  background-color: v.$neutral-800;
-  border-radius: v.$r-6;
-  color: v.$neutral-0;
-  display: flex;
-  flex-direction: row;
-  gap: clamp(v.$sp-015, 0.1365rem + 1.0178vw, v.$sp-025);
-  padding: clamp(v.$sp-02, 0.2615rem + 1.0178vw, v.$sp-025)
-    clamp(v.$sp-025, 0.2672rem + 1.5267vw, v.$sp-04);
-  @include t.dropdown;
-}
-
-.dropdown__title {
-  padding: v.$sp-025 v.$sp-02;
-}
-
-.dropdown__groupTitle {
-  color: v.$neutral-300;
-  padding: v.$sp-015 v.$sp-02;
-  text-transform: capitalize;
-  @include t.dropdownTitle;
-}
-
 .dropdown__group {
   margin-block: v.$sp-01;
   width: 200px;
@@ -69,15 +61,6 @@
   display: grid;
   gap: v.$sp-01;
   justify-items: start;
-}
-
-.dropdown__item {
-  border-radius: v.$r-8;
-  display: flex;
-  gap: v.$sp-025;
-  padding: v.$sp-025 v.$sp-02;
-  text-align: left;
-  width: 100%;
 }
 
 .dropdown__search {

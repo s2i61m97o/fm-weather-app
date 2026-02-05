@@ -8,7 +8,7 @@ function App() {
     <main>
       <Header />
       <Search />
-      <CurrentForecast />
+      {/* <CurrentForecast /> */}
     </main>
   );
 }

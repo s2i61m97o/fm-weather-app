@@ -1,36 +1,35 @@
 import logo from "/images/logo.svg";
-import Dropdown from "../../components/Dropdown";
+import Dropdown from "../../components/Dropdown/Dropdown";
+import DropdownContent from "../../components/Dropdown/DropdownContent";
 import unitsIcon from "/images/icon-units.svg";
 import styles from "./Header.module.scss";
+import useToggle from "../../hooks/useToogle";
 
 export default function Header() {
+  const [open, toggleOpen] = useToggle();
   return (
     <header className={styles.header}>
       <img className={styles.header__logo} src={logo} alt="Weather Now Logo" />
-      <div>
-        <Dropdown>
-          <Dropdown.Button icon={<img src={unitsIcon} />} arrow>
-            Units
-          </Dropdown.Button>
-          <Dropdown.Content>
-            <Dropdown.Title>Switch to Imperial</Dropdown.Title>
-            <Dropdown.Group title="temperature">
-              <Dropdown.Item>Celsius (˚C)</Dropdown.Item>
-              <Dropdown.Item>Fahrenheit (˚F)</Dropdown.Item>
-            </Dropdown.Group>
-            <hr className={styles.header__divider} />
-            <Dropdown.Group title="wind speed">
-              <Dropdown.Item>km /h</Dropdown.Item>
-              <Dropdown.Item>mph</Dropdown.Item>
-            </Dropdown.Group>
-            <hr className={styles.header__divider} />
-            <Dropdown.Group title="precipitation">
-              <Dropdown.Item>Millimetres (mm)</Dropdown.Item>
-              <Dropdown.Item>Inches (in)</Dropdown.Item>
-            </Dropdown.Group>
-          </Dropdown.Content>
-        </Dropdown>
-      </div>
+      <Dropdown>
+        <button onClick={toggleOpen} className={styles.header__button}>
+          <img src={unitsIcon} />
+          Units
+        </button>
+        <DropdownContent open={open}>
+          <button>Switch to Imperial</button>
+          <p className={styles.dropdown__title}>Temperature</p>
+          <button>Celsius (˚C)</button>
+          <button>Fahrenheit (˚F)</button>
+          <hr />
+          <p className={styles.dropdown__title}>Wind Speed</p>
+          <button>km / h</button>
+          <button>mph (˚F)</button>
+          <hr />
+          <p className={styles.dropdown__title}>Precipitation</p>
+          <button>millimetres (mm)</button>
+          <button>inches (in)</button>
+        </DropdownContent>
+      </Dropdown>
     </header>
   );
 }

@@ -2,59 +2,54 @@ import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
 import {getApiData} from "../../api";
-import Dropdown from "../../components/Dropdown";
+import Dropdown from "../../components/Dropdown/Dropdown";
 import type {Location} from "../../types";
+import DropdownContent from "../../components/Dropdown/DropdownContent";
+import useToggle from "../../hooks/useToogle";
 
 export default function Search() {
-  const [locations, setLocations] = useState<Location[]>([]);
-  const [selected, setSelected] = useState(false);
-  const [query, setQuery] = useState<string>("");
+  const [open, toggleOpen] = useToggle();
+  const [queryLocations, setQueryLocations] = useState([]);
 
-  async function getLocations(e: ChangeEvent<HTMLInputElement>) {
-    const search: string = e.currentTarget.value;
-    const results = await getApiData(search);
-    setSelected(false);
-    setQuery(search);
-    if (search.trim() === "") {
-      setLocations([]);
-    } else {
-      setLocations(results || []);
+  async function handleInput(e: ChangeEvent<HTMLInputElement>) {
+    const query = e.currentTarget.value;
+    if (!open) {
+      toggleOpen();
+    } else if (open && query.length === 0) {
+      toggleOpen();
     }
+    const locations = await getApiData(query);
+    setQueryLocations(locations);
   }
 
-  function selectLocation(e: MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    setQuery(e.currentTarget.textContent);
-    setSelected(true);
-  }
+  const dropdownContent = queryLocations?.map((location: Location) => {
+    return (
+      <button
+        key={location.id}
+      >{`${location.name}, ${location.admin1}, ${location.country}`}</button>
+    );
+  });
+
   return (
     <section className={styles.search}>
       <h1 className={styles.search__header}>How's the sky looking today?</h1>
       <form action="get" className={styles.search__form}>
         <Dropdown>
-          <Dropdown.Search
-            onchange={(e: ChangeEvent<HTMLInputElement>) => getLocations(e)}
-            placeholder="Search for a place"
-            value={query}
-            selected={selected}
-          />
-          <Dropdown.Content>
-            {locations.length >= 1 ? (
-              locations.map((location: Location) => (
-                <Dropdown.Item
-                  key={location.id}
-                  id={location.id}
-                  clickFunc={selectLocation}
-                >
-                  {`${location.name}, ${location?.admin1}, ${location.country}`}
-                </Dropdown.Item>
-              ))
+          <div className={styles.search__wrapper}>
+            <input
+              type="text"
+              className={styles.search__input}
+              onChange={handleInput}
+            />
+          </div>
+
+          <DropdownContent open={open}>
+            {dropdownContent ? (
+              dropdownContent
             ) : (
-              <Dropdown.Item icon="loading">
-                Search in progress...
-              </Dropdown.Item>
+              <button disabled>Searching for locations</button>
             )}
-          </Dropdown.Content>
+          </DropdownContent>
         </Dropdown>
         <button className={styles.search__button}>Search</button>
       </form>
