@@ -1,16 +1,22 @@
 import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
-import {getQueryLocations} from "../../api";
+import {queryApiForecast, getQueryLocations} from "../../api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import type {Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
-import useToggle from "../../hooks/useToogle";
+import useToggle from "../../hooks/useToggle";
 
 export default function Search({
-  setLocation,
+  setForecastData,
+  currentLocation,
+  setCurrentLocation,
 }: {
-  setLocation: React.Dispatch<React.SetStateAction<Location | undefined>>;
+  setForecastData: React.Dispatch<React.SetStateAction<Location | undefined>>;
+  currentLocation: Location | undefined;
+  setCurrentLocation: React.Dispatch<
+    React.SetStateAction<Location | undefined>
+  >;
 }) {
   const [open, toggleOpen] = useToggle();
   const [query, setQuery] = useState<string>("");
@@ -37,10 +43,22 @@ export default function Search({
     setQuery(
       `${selectedLocation?.name}, ${selectedLocation?.admin1}, ${selectedLocation?.country}`,
     );
-    setLocation(selectedLocation);
+    setCurrentLocation(selectedLocation);
     if (open) {
       toggleOpen();
     }
+  }
+
+  async function getLocationForecast(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    if (!currentLocation) {
+      return; //Error => please search for location;
+    }
+    const lat = currentLocation.latitude;
+    const long = currentLocation.longitude;
+    const res = await queryApiForecast(lat, long);
+    setForecastData(res);
+    setQuery("");
   }
 
   const dropdownContent = queryLocations?.map((location: Location) => {
@@ -75,7 +93,12 @@ export default function Search({
             )}
           </DropdownContent>
         </Dropdown>
-        <button className={styles.search__button}>Search</button>
+        <button
+          className={styles.search__button}
+          onClick={(e) => getLocationForecast(e)}
+        >
+          Search
+        </button>
       </form>
     </section>
   );

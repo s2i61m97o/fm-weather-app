@@ -3,7 +3,7 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import unitsIcon from "/images/icon-units.svg";
 import styles from "./Header.module.scss";
-import useToggle from "../../hooks/useToogle";
+import useToggle from "../../hooks/useToggle";
 
 export default function Header() {
   const [open, toggleOpen] = useToggle();
