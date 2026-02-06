@@ -3,10 +3,10 @@ import Header from "./sections/Header/Header";
 import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
 import {useState} from "react";
-import type {Location} from "./types";
+import type {Forecast, Location} from "./types";
 
 function App() {
-  const [forecastData, setForecastData] = useState();
+  const [forecastData, setForecastData] = useState<Forecast>();
   const [currentLocation, setCurrentLocation] = useState<Location>();
   return (
     <main>

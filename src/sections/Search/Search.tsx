@@ -3,7 +3,7 @@ import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
 import {queryApiForecast, getQueryLocations} from "../../api";
 import Dropdown from "../../components/Dropdown/Dropdown";
-import type {Location} from "../../types";
+import type {Forecast, Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import useToggle from "../../hooks/useToggle";
 
@@ -12,7 +12,7 @@ export default function Search({
   currentLocation,
   setCurrentLocation,
 }: {
-  setForecastData: React.Dispatch<React.SetStateAction<Location | undefined>>;
+  setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
   currentLocation: Location | undefined;
   setCurrentLocation: React.Dispatch<
     React.SetStateAction<Location | undefined>
