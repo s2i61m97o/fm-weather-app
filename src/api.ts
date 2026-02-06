@@ -1,4 +1,4 @@
-export const getApiData = async (input: string) => {
+export const getQueryLocations = async (input: string) => {
   try {
     const res = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(

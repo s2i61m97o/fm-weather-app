@@ -1,7 +1,7 @@
 import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
-import {getApiData} from "../../api";
+import {getQueryLocations} from "../../api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import type {Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
@@ -24,7 +24,7 @@ export default function Search({
     } else if (open && query.length === 0) {
       toggleOpen();
     }
-    const locations = await getApiData(query);
+    const locations = await getQueryLocations(query);
     setQueryLocations(locations);
   }
 
