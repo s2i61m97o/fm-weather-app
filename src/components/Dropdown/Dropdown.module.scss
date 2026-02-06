@@ -4,6 +4,19 @@
 
 .dropdown {
   position: relative;
+
+  button {
+    background-color: v.$neutral-800;
+    border-radius: v.$r-6;
+    color: v.$neutral-0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: clamp(v.$sp-015, 0.1365rem + 1.0178vw, v.$sp-025);
+    padding: clamp(v.$sp-02, 0.2615rem + 1.0178vw, v.$sp-025)
+      clamp(v.$sp-025, 0.2672rem + 1.5267vw, v.$sp-04);
+    @include t.button;
+  }
 }
 
 .dropdown__content {

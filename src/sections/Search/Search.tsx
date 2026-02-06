@@ -7,12 +7,18 @@ import type {Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import useToggle from "../../hooks/useToogle";
 
-export default function Search() {
+export default function Search({
+  setLocation,
+}: {
+  setLocation: React.Dispatch<React.SetStateAction<Location | undefined>>;
+}) {
   const [open, toggleOpen] = useToggle();
-  const [queryLocations, setQueryLocations] = useState([]);
+  const [query, setQuery] = useState<string>("");
+  const [queryLocations, setQueryLocations] = useState<Location[]>([]);
 
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const query = e.currentTarget.value;
+    setQuery(query);
     if (!open) {
       toggleOpen();
     } else if (open && query.length === 0) {
@@ -22,10 +28,27 @@ export default function Search() {
     setQueryLocations(locations);
   }
 
+  function handleSelection(e: MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    const locationId = e.currentTarget.id;
+    const selectedLocation = queryLocations?.find(
+      (location) => location.id.toString() === locationId,
+    );
+    setQuery(
+      `${selectedLocation?.name}, ${selectedLocation?.admin1}, ${selectedLocation?.country}`,
+    );
+    setLocation(selectedLocation);
+    if (open) {
+      toggleOpen();
+    }
+  }
+
   const dropdownContent = queryLocations?.map((location: Location) => {
     return (
       <button
         key={location.id}
+        id={location.id.toString()}
+        onClick={handleSelection}
       >{`${location.name}, ${location.admin1}, ${location.country}`}</button>
     );
   });
@@ -40,6 +63,7 @@ export default function Search() {
               type="text"
               className={styles.search__input}
               onChange={handleInput}
+              value={query}
             />
           </div>
 
