@@ -30,6 +30,8 @@ export interface DailyForecast {
 }
 
 export interface Forecast {
+  latitude: number;
+  longitude: number;
   current: CurrentForecast;
   hourly: HourForecast;
   daily: DailyForecast;

@@ -17,7 +17,8 @@ export const getQueryLocations = async (input: string) => {
     const data = await res.json();
     return data.results;
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    return [];
   }
 };
 
@@ -36,7 +37,6 @@ export const queryApiForecast = async (lat: number, long: number) => {
   );
 
   const requestUrl = FORECASTURL + searchParams;
-  console.log(requestUrl);
 
   try {
     const res = await fetch(requestUrl);

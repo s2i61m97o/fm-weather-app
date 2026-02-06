@@ -8,6 +8,8 @@ import type {Forecast, Location} from "./types";
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
   const [currentLocation, setCurrentLocation] = useState<Location>();
+  const [locationName, setLocationName] = useState<string>("-");
+
   return (
     <main>
       <Header />
@@ -15,8 +17,12 @@ function App() {
         setForecastData={setForecastData}
         currentLocation={currentLocation}
         setCurrentLocation={setCurrentLocation}
+        setLocationName={setLocationName}
       />
-      <CurrentForecast />
+      <CurrentForecast
+        locationName={locationName}
+        forecast={forecastData ? forecastData.current : undefined}
+      />
     </main>
   );
 }

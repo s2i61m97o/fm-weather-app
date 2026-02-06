@@ -7,17 +7,21 @@ import type {Forecast, Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import useToggle from "../../hooks/useToggle";
 
-export default function Search({
-  setForecastData,
-  currentLocation,
-  setCurrentLocation,
-}: {
+type SearchProps = {
   setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
   currentLocation: Location | undefined;
   setCurrentLocation: React.Dispatch<
     React.SetStateAction<Location | undefined>
   >;
-}) {
+  setLocationName: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function Search({
+  setForecastData,
+  currentLocation,
+  setCurrentLocation,
+  setLocationName,
+}: SearchProps) {
   const [open, toggleOpen] = useToggle();
   const [query, setQuery] = useState<string>("");
   const [queryLocations, setQueryLocations] = useState<Location[]>([]);
@@ -57,6 +61,7 @@ export default function Search({
     const lat = currentLocation.latitude;
     const long = currentLocation.longitude;
     const res = await queryApiForecast(lat, long);
+    setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
     setForecastData(res);
     setQuery("");
   }
