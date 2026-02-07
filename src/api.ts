@@ -33,7 +33,7 @@ export const queryApiForecast = async (lat: number, long: number) => {
   searchParams.set("hourly", "temperature_2m,weather_code");
   searchParams.set(
     "current",
-    "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m",
+    "temperature_2m,relative_humidity_2m,apparent_temperature,wind_speed_10m,weather_code",
   );
 
   const requestUrl = FORECASTURL + searchParams;

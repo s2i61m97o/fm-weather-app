@@ -14,6 +14,7 @@ export interface CurrentForecast {
   relative_humidity_2m: number;
   apparent_temperature: number;
   wind_speed_10m: number;
+  weather_code: number;
 }
 
 export interface HourForecast {
