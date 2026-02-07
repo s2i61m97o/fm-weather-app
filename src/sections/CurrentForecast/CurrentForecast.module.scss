@@ -25,7 +25,7 @@
   }
 
   p {
-    @include t.date;
+    @include t.cardHeader;
   }
 }
 
@@ -44,4 +44,34 @@
 .forecast__icon {
   height: 120px;
   width: 120px;
+}
+
+.forecast__container {
+  display: grid;
+  gap: v.$sp-04;
+  grid-template-columns: 1fr 1fr;
+  margin-block: v.$sp-05;
+
+  @include mq.sm {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.forecast__card {
+  background-color: v.$neutral-800;
+  border: 1px solid inset v.$neutral-600;
+  border-radius: v.$r-12;
+  padding: v.$sp-05;
+
+  h3 {
+    color: v.$neutral-200;
+    margin-block-end: v.$sp-06;
+    text-transform: capitalize;
+    @include t.cardHeader;
+  }
+
+  p {
+    color: v.$neutral-0;
+    @include t.cardData;
+  }
 }

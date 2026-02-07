@@ -15,7 +15,7 @@
   line-height: $lh-loose;
 }
 
-@mixin txt-prst-3 {
+@mixin cardData {
   font-family: $font-primary;
   font-size: $font-3xl;
   font-weight: $font-light;
@@ -43,7 +43,7 @@
   line-height: $lh-loose;
 }
 
-@mixin date {
+@mixin cardHeader {
   font-family: $font-primary;
   font-size: $font-lg;
   font-weight: $font-medium;

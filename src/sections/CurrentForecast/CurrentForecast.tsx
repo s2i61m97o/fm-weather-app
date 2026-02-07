@@ -11,7 +11,29 @@ export default function CurrentForecast({
   forecast,
   locationName,
 }: CurrentForecastProps) {
+  if (!forecast) {
+    return;
+  }
+
   const iconSrc = getIcon(forecast?.weather_code);
+  const cardData = [
+    {
+      title: "feels like",
+      data: `${Math.round(forecast?.apparent_temperature)}˚`,
+    },
+    {title: "humidity", data: `${forecast?.relative_humidity_2m}%`},
+    {title: "wind", data: `${Math.round(forecast?.wind_speed_10m)} km/h`},
+    {title: "precipitation", data: `${Math.round(forecast?.precipitation)} mm`},
+  ];
+
+  const cards = cardData.map((data) => {
+    return (
+      <div key={data.title} className={styles.forecast__card}>
+        <h3>{data.title}</h3>
+        <p>{data.data}</p>
+      </div>
+    );
+  });
 
   return (
     <section className={styles.forecast}>
@@ -29,6 +51,7 @@ export default function CurrentForecast({
           </>
         )}
       </div>
+      <div className={styles.forecast__container}>{cards}</div>
     </section>
   );
 }

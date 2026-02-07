@@ -8,13 +8,14 @@ export interface Location {
 }
 
 export interface CurrentForecast {
-  time: string;
-  interval: number;
-  temperature_2m: number;
-  relative_humidity_2m: number;
   apparent_temperature: number;
-  wind_speed_10m: number;
+  interval: number;
+  relative_humidity_2m: number;
+  precipitation: number;
+  temperature_2m: number;
+  time: string;
   weather_code: number;
+  wind_speed_10m: number;
 }
 
 export interface HourForecast {

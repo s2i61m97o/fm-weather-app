@@ -30,12 +30,12 @@
   height: 0;
   justify-items: start;
   max-width: 100%;
-  min-width: min-content;
+  min-width: fit-content;
   overflow: hidden;
   right: 0;
   padding: 0;
   position: absolute;
-  text-wrap: nowrap;
+  text-wrap: wrap;
   width: 100%;
   z-index: 100;
   transition:
@@ -45,6 +45,7 @@
   button {
     cursor: pointer;
     padding: v.$sp-025 v.$sp-02;
+    text-align: left;
     @include t.button;
   }
 
