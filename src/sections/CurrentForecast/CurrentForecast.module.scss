@@ -32,7 +32,7 @@
 .forecast__temp {
   align-items: center;
   display: flex;
-  //   gap: v.$sp-05;
+  gap: v.$sp-05;
   justify-content: space-around;
   margin-block: v.$sp-04;
 
@@ -61,6 +61,7 @@
   background-color: v.$neutral-800;
   border: 1px solid inset v.$neutral-600;
   border-radius: v.$r-12;
+  height: 7.5rem;
   padding: v.$sp-05;
 
   h3 {
