@@ -1,15 +1,18 @@
 import styles from "./CurrentForecast.module.scss";
 import type {CurrentForecast} from "../../types";
 import {getIcon} from "../../utils";
+import loadingIcon from "/images/icon-loading.svg";
 
 type CurrentForecastProps = {
   forecast: CurrentForecast | undefined;
   locationName: string;
+  loading: boolean;
 };
 
 export default function CurrentForecast({
   forecast,
   locationName,
+  loading,
 }: CurrentForecastProps) {
   const iconSrc = getIcon(forecast?.weather_code);
 
@@ -51,6 +54,12 @@ export default function CurrentForecast({
   return (
     <section className={styles.forecast}>
       <div className={styles.forecast__weatherInfo}>
+        {loading && (
+          <div className={styles.forecast__loading}>
+            <img src={loadingIcon} />
+            <h3>Loading...</h3>
+          </div>
+        )}
         <div className={styles.forecast__locationInfo}>
           <h2>{locationName}</h2>
           <p>{date}</p>

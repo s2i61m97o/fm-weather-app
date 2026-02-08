@@ -9,6 +9,7 @@ function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
   const [currentLocation, setCurrentLocation] = useState<Location>();
   const [locationName, setLocationName] = useState<string>("-");
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <main>
@@ -18,10 +19,12 @@ function App() {
         currentLocation={currentLocation}
         setCurrentLocation={setCurrentLocation}
         setLocationName={setLocationName}
+        setLoading={setLoading}
       />
       <CurrentForecast
         locationName={locationName}
         forecast={forecastData ? forecastData.current : undefined}
+        loading={loading}
       />
     </main>
   );

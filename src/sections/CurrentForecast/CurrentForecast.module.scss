@@ -13,6 +13,7 @@
   background-size: cover;
   border-radius: v.$r-20;
   padding: v.$sp-06;
+  position: relative;
   text-align: center;
 
   @include mq.sm {
@@ -44,6 +45,29 @@
 .forecast__icon {
   height: 120px;
   width: 120px;
+}
+
+.forecast__loading {
+  align-items: center;
+  background-color: v.$neutral-800;
+  border-radius: inherit;
+  bottom: 0;
+  color: v.$neutral-0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp-04;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 50;
+  @include t.input;
+
+  img {
+    height: 40px;
+    width: 40px;
+  }
 }
 
 .forecast__container {

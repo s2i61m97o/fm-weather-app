@@ -14,6 +14,7 @@ type SearchProps = {
     React.SetStateAction<Location | undefined>
   >;
   setLocationName: React.Dispatch<React.SetStateAction<string>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Search({
@@ -21,6 +22,7 @@ export default function Search({
   currentLocation,
   setCurrentLocation,
   setLocationName,
+  setLoading,
 }: SearchProps) {
   const [open, toggleOpen] = useToggle();
   const [query, setQuery] = useState<string>("");
@@ -55,6 +57,7 @@ export default function Search({
 
   async function getLocationForecast(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setLoading(true);
     if (!currentLocation) {
       return; //Error => please search for location;
     }
@@ -64,6 +67,7 @@ export default function Search({
     setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
     setForecastData(res);
     setQuery("");
+    setLoading(false);
   }
 
   const dropdownContent = queryLocations?.map((location: Location) => {
