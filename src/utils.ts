@@ -1,4 +1,4 @@
-import {ICON_CODES, ICON_SRC} from "./contraits";
+import {ICON_CODES, ICON_SRC} from "./constraints";
 
 export const getIcon = (code: number | undefined) => {
   if (code === undefined) {
