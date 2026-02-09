@@ -3,7 +3,7 @@ import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
 import useToggle from "../../hooks/useToggle";
 import type {Forecast, Location, ApiError} from "../../types";
-import {queryApiForecast, getQueryLocations} from "../../api";
+import {queryApiForecast, getQueryLocations} from "../../api/api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 
