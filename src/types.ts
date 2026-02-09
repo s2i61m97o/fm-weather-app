@@ -38,3 +38,15 @@ export interface Forecast {
   hourly: HourForecast;
   daily: DailyForecast;
 }
+
+export interface ApiError {
+  type: string;
+  status: number;
+  userMessage: string;
+  shouldRetry: boolean;
+  details: string | ErrorMessage | Promise<unknown>;
+}
+
+export type ErrorMessage = {
+  message: string;
+};

@@ -3,13 +3,14 @@ import Header from "./sections/Header/Header";
 import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
 import {useState} from "react";
-import type {Forecast, Location} from "./types";
+import type {Forecast, Location, ApiError} from "./types";
 
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
   const [currentLocation, setCurrentLocation] = useState<Location>();
   const [locationName, setLocationName] = useState<string>("-");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<ApiError | undefined>();
 
   return (
     <main>
@@ -20,6 +21,7 @@ function App() {
         setCurrentLocation={setCurrentLocation}
         setLocationName={setLocationName}
         setLoading={setLoading}
+        setError={setError}
       />
       <CurrentForecast
         locationName={locationName}

@@ -1,11 +1,11 @@
 import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
+import useToggle from "../../hooks/useToggle";
+import type {Forecast, Location, ApiError} from "../../types";
 import {queryApiForecast, getQueryLocations} from "../../api";
 import Dropdown from "../../components/Dropdown/Dropdown";
-import type {Forecast, Location} from "../../types";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
-import useToggle from "../../hooks/useToggle";
 
 type SearchProps = {
   setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
@@ -15,6 +15,7 @@ type SearchProps = {
   >;
   setLocationName: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<ApiError | undefined>>;
 };
 
 export default function Search({
@@ -23,6 +24,7 @@ export default function Search({
   setCurrentLocation,
   setLocationName,
   setLoading,
+  setError,
 }: SearchProps) {
   const [open, toggleOpen] = useToggle();
   const [query, setQuery] = useState<string>("");
@@ -36,10 +38,13 @@ export default function Search({
     } else if (open && query.length === 0) {
       toggleOpen();
     }
+
     const locations = await getQueryLocations(query);
-    if (locations.success) {
-      setQueryLocations(locations.data);
+    if (!locations?.success) {
+      setError(locations?.error);
+      return;
     }
+    setQueryLocations(locations?.data);
   }
 
   function handleSelection(e: MouseEvent<HTMLButtonElement>) {
@@ -65,11 +70,20 @@ export default function Search({
     }
     const lat = currentLocation.latitude;
     const long = currentLocation.longitude;
-    const res = await queryApiForecast(lat, long);
-    setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
-    setForecastData(res.data);
-    setQuery("");
-    setLoading(false);
+
+    try {
+      const res = await queryApiForecast(lat, long);
+      if (!res?.success) {
+        setError(res?.error);
+        return;
+      }
+
+      setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
+      setForecastData(res?.data);
+      setQuery("");
+    } finally {
+      setLoading(false);
+    }
   }
 
   const dropdownContent = queryLocations?.map((location: Location) => {
