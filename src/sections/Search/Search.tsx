@@ -37,7 +37,9 @@ export default function Search({
       toggleOpen();
     }
     const locations = await getQueryLocations(query);
-    setQueryLocations(locations);
+    if (locations.success) {
+      setQueryLocations(locations.data);
+    }
   }
 
   function handleSelection(e: MouseEvent<HTMLButtonElement>) {
@@ -65,7 +67,7 @@ export default function Search({
     const long = currentLocation.longitude;
     const res = await queryApiForecast(lat, long);
     setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
-    setForecastData(res);
+    setForecastData(res.data);
     setQuery("");
     setLoading(false);
   }
