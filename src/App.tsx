@@ -2,6 +2,7 @@ import "./styles/App.css";
 import Header from "./sections/Header/Header";
 import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
+import Daily from "./sections/Daily/Daily";
 import {useState} from "react";
 import type {Forecast, Location, ApiError} from "./types";
 
@@ -19,7 +20,6 @@ function App() {
         setForecastData={setForecastData}
         currentLocation={currentLocation}
         setCurrentLocation={setCurrentLocation}
-        locationName={locationName}
         setLocationName={setLocationName}
         setLoading={setLoading}
         error={error}
@@ -30,6 +30,7 @@ function App() {
         forecast={forecastData ? forecastData.current : undefined}
         loading={loading}
       />
+      <Daily forecast={forecastData ? forecastData.daily : undefined} />
     </main>
   );
 }

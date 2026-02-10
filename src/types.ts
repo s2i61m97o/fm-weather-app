@@ -27,8 +27,8 @@ export interface HourForecast {
 export interface DailyForecast {
   time: string[];
   weather_code: number[];
-  temperature_2m_max: number;
-  temperature_2m_min: number;
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
 }
 
 export interface Forecast {

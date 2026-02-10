@@ -14,7 +14,6 @@ type SearchProps = {
   setCurrentLocation: React.Dispatch<
     React.SetStateAction<Location | undefined>
   >;
-  locationName: string;
   setLocationName: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   error: ApiError | undefined;
@@ -25,7 +24,6 @@ export default function Search({
   setForecastData,
   currentLocation,
   setCurrentLocation,
-  locationName,
   setLocationName,
   setLoading,
   error,
@@ -126,11 +124,6 @@ export default function Search({
       setError(undefined);
     }
   }
-
-  console.log("Current Location: " + currentLocation?.name);
-  console.log("Location Name: " + locationName);
-  console.log("Error: " + error?.userMessage);
-  console.log("Query: " + query);
 
   const dropdownContent = queryLocations?.map((location: Location) => {
     return (

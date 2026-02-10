@@ -22,7 +22,7 @@
 
   h2 {
     margin-block: v.$sp-03;
-    @include t.location;
+    @include t.title;
   }
 
   p {

@@ -1,0 +1,47 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.daily {
+  height: fit-content;
+}
+
+.daily__header {
+  color: v.$neutral-0;
+  @include t.title;
+}
+
+.daily__cardContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: v.$sp-04;
+  @include mq.sm {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.daily__card {
+  align-items: center;
+  background-color: v.$neutral-800;
+  border: 1px solid v.$neutral-600;
+  border-radius: v.$r-12;
+  color: v.$neutral-0;
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp-04;
+  min-height: 172px;
+  padding: v.$sp-04 v.$sp-025;
+  @include t.input;
+}
+
+.daily__icon {
+  height: 60px;
+  width: 60px;
+}
+
+.daily__temp {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @include t.cardHeader;
+}
