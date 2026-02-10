@@ -79,3 +79,25 @@
     outline-offset: 3px;
   }
 }
+
+.search__error {
+  background-color: v.$orange-500;
+  border-top-left-radius: v.$r-12;
+  border-top-right-radius: v.$r-12;
+  bottom: 100%;
+  color: v.$neutral-0;
+  left: 0;
+  outline: 1px solid v.$orange-500;
+  padding-inline: v.$sp-04;
+  position: absolute;
+  right: 0;
+  @include t.dropdownTitle;
+  transition: all 350ms ease-out;
+}
+
+.search__inputError {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  outline: 1px solid v.$orange-500;
+  transition: all 350ms ease-out;
+}

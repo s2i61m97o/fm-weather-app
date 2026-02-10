@@ -6,6 +6,7 @@ import type {Forecast, Location, ApiError} from "../../types";
 import {queryApiForecast, getQueryLocations} from "../../api/api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
+import clsx from "clsx";
 
 type SearchProps = {
   setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
@@ -13,8 +14,10 @@ type SearchProps = {
   setCurrentLocation: React.Dispatch<
     React.SetStateAction<Location | undefined>
   >;
+  locationName: string;
   setLocationName: React.Dispatch<React.SetStateAction<string>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: ApiError | undefined;
   setError: React.Dispatch<React.SetStateAction<ApiError | undefined>>;
 };
 
@@ -22,8 +25,10 @@ export default function Search({
   setForecastData,
   currentLocation,
   setCurrentLocation,
+  locationName,
   setLocationName,
   setLoading,
+  error,
   setError,
 }: SearchProps) {
   const [open, toggleOpen] = useToggle();
@@ -64,27 +69,68 @@ export default function Search({
 
   async function getLocationForecast(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setLoading(true);
-    if (!currentLocation) {
-      return; //Error => please search for location;
+    // Close dropdown menu, set loading state
+    if (open) {
+      toggleOpen();
     }
+    setLoading(true);
+
+    // handle empty input
+    if (!query) {
+      setError({
+        type: "EMPTY_INPUT",
+        status: 0,
+        userMessage: "Please enter a location",
+        shouldRetry: false,
+        details: "empty input on submit",
+      });
+      setLoading(false);
+      return;
+    }
+
+    // Case nothing selected from dropdown
+    if (!currentLocation) {
+      setError({
+        type: "EMPTY_INPUT",
+        status: 0,
+        userMessage: "Please select a location from the dropdown",
+        shouldRetry: false,
+        details: "empty input on submit",
+      });
+      return;
+    }
+
     const lat = currentLocation.latitude;
     const long = currentLocation.longitude;
 
+    // get forecast
     try {
       const res = await queryApiForecast(lat, long);
-      if (!res?.success) {
+      // handle error response
+      if (!res || !res.success) {
         setError(res?.error);
         return;
       }
-
+      // set the location name and data, reset query
       setLocationName(`${currentLocation.name}, ${currentLocation.country}`);
       setForecastData(res?.data);
       setQuery("");
     } finally {
+      // remove loading state
       setLoading(false);
     }
   }
+
+  function handleFocus() {
+    if (error?.type === "EMPTY_INPUT") {
+      setError(undefined);
+    }
+  }
+
+  console.log("Current Location: " + currentLocation?.name);
+  console.log("Location Name: " + locationName);
+  console.log("Error: " + error?.userMessage);
+  console.log("Query: " + query);
 
   const dropdownContent = queryLocations?.map((location: Location) => {
     return (
@@ -101,12 +147,23 @@ export default function Search({
       <h1 className={styles.search__header}>How's the sky looking today?</h1>
       <form action="get" className={styles.search__form}>
         <Dropdown>
+          <p
+            className={clsx(
+              error?.type === "EMPTY_INPUT" && styles.search__error,
+            )}
+          >
+            {error?.userMessage}
+          </p>
           <div className={styles.search__wrapper}>
             <input
               type="text"
-              className={styles.search__input}
+              className={clsx(
+                styles.search__input,
+                error?.type === "EMPTY_INPUT" && styles.search__inputError,
+              )}
               onChange={handleInput}
               value={query}
+              onFocus={handleFocus}
             />
           </div>
 

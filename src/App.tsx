@@ -19,8 +19,10 @@ function App() {
         setForecastData={setForecastData}
         currentLocation={currentLocation}
         setCurrentLocation={setCurrentLocation}
+        locationName={locationName}
         setLocationName={setLocationName}
         setLoading={setLoading}
+        error={error}
         setError={setError}
       />
       <CurrentForecast
