@@ -14,8 +14,20 @@ body {
   display: grid;
   gap: v.$sp-08;
   margin-block: clamp(v.$sp-08, 0.8571rem + 2.381vw, v.$sp-12);
+  opacity: 1;
+  transition: all 350ms ease-in;
+  @include mq.md {
+    transition:
+      visibility 350ms ease-in 250ms,
+      opacity 350ms ease-in 250ms;
+  }
   @include mq.lg {
     grid-template-columns: 2fr 1fr;
     grid-template-rows: max-content min-content;
   }
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
 }

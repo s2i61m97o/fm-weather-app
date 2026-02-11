@@ -6,6 +6,7 @@ import Daily from "./sections/Daily/Daily";
 import {useState} from "react";
 import type {Forecast, Location, ApiError} from "./types";
 import Hourly from "./sections/Hourly/Hourly";
+import clsx from "clsx";
 
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
@@ -39,8 +40,10 @@ function App() {
           setLoading={setLoading}
           error={error}
           setError={setError}
+          forecast={forecastData ? true : false}
         />
-        <section className="forecasts">
+
+        <section className={clsx("forecasts", !forecastData && "hide")}>
           <CurrentForecast
             locationName={locationName}
             forecast={forecastData ? forecastData.current : undefined}

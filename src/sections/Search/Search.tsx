@@ -18,6 +18,7 @@ type SearchProps = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   error: ApiError | undefined;
   setError: React.Dispatch<React.SetStateAction<ApiError | undefined>>;
+  forecast: boolean;
 };
 
 export default function Search({
@@ -28,6 +29,7 @@ export default function Search({
   setLoading,
   error,
   setError,
+  forecast,
 }: SearchProps) {
   const [open, toggleOpen] = useToggle();
   const [query, setQuery] = useState<string>("");
@@ -136,7 +138,7 @@ export default function Search({
   });
 
   return (
-    <section className={styles.search}>
+    <section className={clsx(styles.search, !forecast && styles.searchInitial)}>
       <h1 className={styles.search__header}>How's the sky looking today?</h1>
       <form action="get" className={styles.search__form}>
         <Dropdown>

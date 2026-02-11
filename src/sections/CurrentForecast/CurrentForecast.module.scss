@@ -14,7 +14,7 @@
   padding: v.$sp-06;
   position: relative;
   text-align: center;
-
+  z-index: -1;
   @include mq.sm {
     background-image: url(images/bg-today-large.svg);
   }
