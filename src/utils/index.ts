@@ -1,4 +1,4 @@
-export * from "./convertToFahrenheit";
-export * from "./convertToInch";
-export * from "./convertToMph";
+export * from "./toFahrenheit";
+export * from "./toInch";
+export * from "./toMph";
 export * from "./getIcon";
