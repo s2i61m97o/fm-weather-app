@@ -6,6 +6,7 @@ import dropdownIcon from "/images/icon-dropdown.svg";
 import styles from "./Header.module.scss";
 import useToggle from "../../hooks/useToggle";
 import checkIcon from "/images/icon-checkmark.svg";
+import clsx from "clsx";
 
 interface HeaderProps {
   speedImperial: boolean;
@@ -61,7 +62,10 @@ export default function Header({
 
           <p className={styles.dropdown__title}>Temperature</p>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              !tempImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setTempImperial)}
             disabled={!tempImperial}
           >
@@ -71,7 +75,10 @@ export default function Header({
             )}
           </button>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              tempImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setTempImperial)}
             disabled={tempImperial}
           >
@@ -85,7 +92,10 @@ export default function Header({
 
           <p className={styles.dropdown__title}>Wind Speed</p>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              !speedImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setSpeedImperial)}
             disabled={!speedImperial}
           >
@@ -95,7 +105,10 @@ export default function Header({
             )}
           </button>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              speedImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setSpeedImperial)}
             disabled={speedImperial}
           >
@@ -109,7 +122,10 @@ export default function Header({
 
           <p className={styles.dropdown__title}>Precipitation</p>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              !precipImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setPrecipImperial)}
             disabled={!precipImperial}
           >
@@ -119,7 +135,10 @@ export default function Header({
             )}
           </button>
           <button
-            className={styles.dropdown__button}
+            className={clsx(
+              styles.dropdown__button,
+              precipImperial && styles.dropdown__buttonActive,
+            )}
             onClick={() => toggleUnits(setPrecipImperial)}
             disabled={precipImperial}
           >
