@@ -4,7 +4,7 @@ import styles from "./Hourly.module.scss";
 import useToggle from "../../hooks/useToggle";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import {useEffect, useState, type JSX} from "react";
-import {getIcon} from "../../utils";
+import {getIcon, toFahrenheit} from "../../utils";
 import type {MouseEvent} from "react";
 import {DAYS} from "../../constraints";
 import dropdownIcon from "/images/icon-dropdown.svg";
@@ -17,8 +17,10 @@ type Card = {
 
 export default function Hourly({
   forecast,
+  imperial,
 }: {
   forecast: HourForecast | undefined;
+  imperial: boolean;
 }) {
   const [open, toggleOpen] = useToggle();
   const [day, setDay] = useState<string>();
@@ -33,6 +35,10 @@ export default function Hourly({
   if (!forecast?.time) {
     return;
   }
+
+  const imperialTemp = forecast.temperature_2m.map((temp) => {
+    return toFahrenheit(temp);
+  });
 
   const cards: Card[] = forecast.time.map((time, index) => {
     const cardDay = new Date(time).toLocaleDateString("en", {weekday: "long"});
@@ -52,7 +58,10 @@ export default function Hourly({
           <img src={icon} alt="" className={styles.hourly__icon} />
           <p>{time12hrs}</p>
           <p className={styles.hourly__temp}>
-            {Math.round(forecast.temperature_2m[index])}˚
+            {imperial
+              ? imperialTemp[index]
+              : Math.round(forecast.temperature_2m[index])}
+            ˚
           </p>
         </div>
       ),

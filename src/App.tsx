@@ -13,11 +13,12 @@ function App() {
   const [locationName, setLocationName] = useState<string>("-");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<ApiError | undefined>();
+  const [imperial, setImperial] = useState<boolean>(false);
 
   return (
     <>
       <main>
-        <Header />
+        <Header imperial={imperial} setImperial={setImperial} />
         <Search
           setForecastData={setForecastData}
           currentLocation={currentLocation}
@@ -32,9 +33,16 @@ function App() {
             locationName={locationName}
             forecast={forecastData ? forecastData.current : undefined}
             loading={loading}
+            imperial={imperial}
           />
-          <Daily forecast={forecastData ? forecastData.daily : undefined} />
-          <Hourly forecast={forecastData ? forecastData.hourly : undefined} />
+          <Daily
+            forecast={forecastData ? forecastData.daily : undefined}
+            imperial={imperial}
+          />
+          <Hourly
+            forecast={forecastData ? forecastData.hourly : undefined}
+            imperial={imperial}
+          />
         </section>
       </main>
     </>

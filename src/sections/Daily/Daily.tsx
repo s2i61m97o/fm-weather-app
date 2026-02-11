@@ -1,19 +1,25 @@
 import type {DailyForecast} from "../../types";
-import {getIcon} from "../../utils";
+import {getIcon, toFahrenheit} from "../../utils";
 import styles from "./Daily.module.scss";
 
 export default function Daily({
   forecast,
+  imperial,
 }: {
   forecast: DailyForecast | undefined;
+  imperial: boolean;
 }) {
   const dayCards = forecast?.time.map((time, index) => {
     const date = new Date(time);
 
     const day = new Intl.DateTimeFormat("en", {weekday: "short"}).format(date);
     const icon = getIcon(forecast.weather_code[index]);
-    const maxTemp: number = Math.round(forecast.temperature_2m_max[index]);
-    const minTemp: number = Math.round(forecast.temperature_2m_min[index]);
+    const maxTemp: number = imperial
+      ? toFahrenheit(forecast.temperature_2m_max[index])
+      : Math.round(forecast.temperature_2m_max[index]);
+    const minTemp: number = imperial
+      ? toFahrenheit(forecast.temperature_2m_min[index])
+      : Math.round(forecast.temperature_2m_min[index]);
 
     return (
       <div className={styles.daily__card}>

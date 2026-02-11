@@ -1,18 +1,20 @@
 import styles from "./CurrentForecast.module.scss";
 import type {CurrentForecast} from "../../types";
-import {getIcon} from "../../utils";
+import {getIcon, toFahrenheit, toInches, toMph} from "../../utils";
 import loadingIcon from "/images/icon-loading.svg";
 
 type CurrentForecastProps = {
   forecast: CurrentForecast | undefined;
   locationName: string;
   loading: boolean;
+  imperial: boolean;
 };
 
 export default function CurrentForecast({
   forecast,
   locationName,
   loading,
+  imperial,
 }: CurrentForecastProps) {
   const iconSrc = getIcon(forecast?.weather_code);
 
@@ -26,7 +28,9 @@ export default function CurrentForecast({
   const cardData = [
     {
       title: "feels like",
-      data: forecast ? `${Math.round(forecast?.apparent_temperature)}˚` : "-",
+      data: forecast
+        ? `${imperial ? toFahrenheit(forecast?.apparent_temperature) : Math.round(forecast?.apparent_temperature)}˚`
+        : "-",
     },
     {
       title: "humidity",
@@ -34,11 +38,19 @@ export default function CurrentForecast({
     },
     {
       title: "wind",
-      data: forecast ? `${Math.round(forecast?.wind_speed_10m)} km/h` : "-",
+      data: forecast
+        ? imperial
+          ? `${toMph(forecast?.wind_speed_10m)} mph`
+          : `${Math.round(forecast?.wind_speed_10m)} km/h`
+        : "-",
     },
     {
       title: "precipitation",
-      data: forecast ? `${Math.round(forecast?.precipitation)} mm` : "-",
+      data: forecast
+        ? imperial
+          ? `${toInches(forecast.precipitation)} in`
+          : `${Math.round(forecast?.precipitation)} mm`
+        : "-",
     },
   ];
 
@@ -70,7 +82,14 @@ export default function CurrentForecast({
           ) : (
             <div className={styles.forecast__icon}></div>
           )}
-          <p>{forecast ? Math.round(forecast.temperature_2m) : "-"}˚</p>
+          <p>
+            {forecast
+              ? imperial
+                ? `${toFahrenheit(forecast.temperature_2m)}`
+                : Math.round(forecast.temperature_2m)
+              : "-"}
+            ˚
+          </p>
         </div>
       </div>
       <div className={styles.forecast__container}>{cards}</div>

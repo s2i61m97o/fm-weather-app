@@ -15,6 +15,10 @@
   width: clamp(v.$sp-35, 5.1718rem + 15.2672vw, 12.5rem);
 }
 
+.header__button {
+  display: flex;
+}
+
 .dropdown__divider {
   border: solid 1px v.$neutral-600;
   width: 100%;
@@ -29,4 +33,17 @@
 
 .dropdown__switch {
   text-wrap: nowrap;
+}
+
+.dropdown__icon {
+  height: 14px;
+  width: 14px;
+  justify-self: end;
+}
+
+.dropdown__button {
+  display: grid;
+  grid-template-columns: auto max-content;
+  min-width: 180px;
+  width: 100%;
 }
