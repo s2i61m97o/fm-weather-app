@@ -49,10 +49,10 @@ Users should be able to:
 - CSS custom properties
 - Flexbox
 - CSS Grid
+- SASS
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- TypeScript
 
 ### What I learned
 
