@@ -5,8 +5,11 @@
 .hourly {
   background-color: v.$neutral-800;
   border-radius: v.$r-12;
-  margin-block-start: v.$sp-08;
   padding: v.$sp-06;
+
+  @include mq.lg {
+    grid-area: 1 / 2 / 3 / 3;
+  }
 }
 
 .hourly__header {
@@ -30,7 +33,7 @@
   display: grid;
   gap: v.$sp-04;
   overflow-y: scroll;
-  max-height: 27.5rem;
+  max-height: calc((8 * v.$sp-16) + (8 * v.$sp-04));
 }
 
 .hourly__card {
@@ -43,6 +46,7 @@
   gap: v.$sp-02;
   grid-template-columns: max-content max-content auto;
   padding-inline: v.$sp-03;
+  padding-block: v.$sp-025;
   @include t.cardHeader;
 }
 

@@ -1,4 +1,4 @@
-import "./styles/App.css";
+import "./styles/App.scss";
 import Header from "./sections/Header/Header";
 import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
@@ -15,25 +15,29 @@ function App() {
   const [error, setError] = useState<ApiError | undefined>();
 
   return (
-    <main>
-      <Header />
-      <Search
-        setForecastData={setForecastData}
-        currentLocation={currentLocation}
-        setCurrentLocation={setCurrentLocation}
-        setLocationName={setLocationName}
-        setLoading={setLoading}
-        error={error}
-        setError={setError}
-      />
-      <CurrentForecast
-        locationName={locationName}
-        forecast={forecastData ? forecastData.current : undefined}
-        loading={loading}
-      />
-      <Daily forecast={forecastData ? forecastData.daily : undefined} />
-      <Hourly forecast={forecastData ? forecastData.hourly : undefined} />
-    </main>
+    <>
+      <main>
+        <Header />
+        <Search
+          setForecastData={setForecastData}
+          currentLocation={currentLocation}
+          setCurrentLocation={setCurrentLocation}
+          setLocationName={setLocationName}
+          setLoading={setLoading}
+          error={error}
+          setError={setError}
+        />
+        <section className="forecasts">
+          <CurrentForecast
+            locationName={locationName}
+            forecast={forecastData ? forecastData.current : undefined}
+            loading={loading}
+          />
+          <Daily forecast={forecastData ? forecastData.daily : undefined} />
+          <Hourly forecast={forecastData ? forecastData.hourly : undefined} />
+        </section>
+      </main>
+    </>
   );
 }
 

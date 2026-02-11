@@ -15,8 +15,9 @@
   width: clamp(v.$sp-35, 5.1718rem + 15.2672vw, 12.5rem);
 }
 
-.header__divider {
+.dropdown__divider {
   border: solid 1px v.$neutral-600;
+  width: 100%;
 }
 
 .dropdown__title {
@@ -24,4 +25,8 @@
   padding: v.$sp-015 v.$sp-02;
   text-transform: capitalize;
   @include t.dropdownTitle;
+}
+
+.dropdown__switch {
+  text-wrap: nowrap;
 }

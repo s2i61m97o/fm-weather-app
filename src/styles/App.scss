@@ -1,0 +1,21 @@
+@use "./sass/breakpoints" as mq;
+@use "./sass/variables" as v;
+
+body {
+  background-color: v.$neutral-900;
+  min-height: 100vh;
+  margin-inline: clamp(v.$sp-04, 0.5229rem + 2.0356vw, v.$sp-06);
+  @include mq.md {
+    margin-inline: clamp(v.$sp-06, -4.7857rem + 13.0952vw, v.$sp-28);
+  }
+}
+
+.forecasts {
+  display: grid;
+  gap: v.$sp-08;
+  margin-block: clamp(v.$sp-08, 0.8571rem + 2.381vw, v.$sp-12);
+  @include mq.lg {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: max-content min-content;
+  }
+}
