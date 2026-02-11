@@ -5,9 +5,7 @@ describe("toInch", () => {
     const result = toInches(2);
     expect(result).toBe("0.1");
   });
-});
 
-describe("toInch", () => {
   it("should convert mm to inches", () => {
     const result = toInches(13);
     expect(result).toBe("0.5");
