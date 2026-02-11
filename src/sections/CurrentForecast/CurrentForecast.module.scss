@@ -19,6 +19,13 @@
   @include mq.sm {
     background-image: url(images/bg-today-large.svg);
   }
+  @include mq.md {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: v.$sp-20 v.$sp-06;
+    text-align: left;
+  }
 
   h2 {
     margin-block: v.$sp-03;
