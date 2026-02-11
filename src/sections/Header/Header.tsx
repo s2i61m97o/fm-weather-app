@@ -7,17 +7,43 @@ import styles from "./Header.module.scss";
 import useToggle from "../../hooks/useToggle";
 import checkIcon from "/images/icon-checkmark.svg";
 
+interface HeaderProps {
+  speedImperial: boolean;
+  setSpeedImperial: React.Dispatch<React.SetStateAction<boolean>>;
+  tempImperial: boolean;
+  setTempImperial: React.Dispatch<React.SetStateAction<boolean>>;
+  precipImperial: boolean;
+  setPrecipImperial: React.Dispatch<React.SetStateAction<boolean>>;
+  imperialStates: boolean[];
+}
+
 export default function Header({
-  imperial,
-  setImperial,
-}: {
-  imperial: boolean;
-  setImperial: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+  speedImperial,
+  setSpeedImperial,
+  tempImperial,
+  setTempImperial,
+  precipImperial,
+  setPrecipImperial,
+  imperialStates,
+}: HeaderProps) {
   const [open, toggleOpen] = useToggle();
-  function toggleUnits() {
-    setImperial((prev) => !prev);
+  function toggleUnits(setFn: React.Dispatch<React.SetStateAction<boolean>>) {
+    setFn((prev) => !prev);
   }
+
+  const numOfImperials = imperialStates.filter((state) => state).length;
+  const toggleAllUnits = () => {
+    if (numOfImperials > 1) {
+      setPrecipImperial(false);
+      setSpeedImperial(false);
+      setTempImperial(false);
+    } else {
+      setPrecipImperial(true);
+      setSpeedImperial(true);
+      setTempImperial(true);
+    }
+  };
+
   return (
     <header className={styles.header}>
       <img className={styles.header__logo} src={logo} alt="Weather Now Logo" />
@@ -28,47 +54,77 @@ export default function Header({
           <img src={dropdownIcon} alt="" />
         </button>
         <DropdownContent open={open}>
-          <button onClick={toggleUnits} className={styles.dropdown__switch}>
-            Switch to {imperial ? "Metric" : "Imperial"}
+          <button className={styles.dropdown__switch} onClick={toggleAllUnits}>
+            Switch to
+            {numOfImperials > 1 ? " Metric" : " Imperial"}
           </button>
+
           <p className={styles.dropdown__title}>Temperature</p>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setTempImperial)}
+            disabled={!tempImperial}
+          >
             <p>Celsius (˚C)</p>
-            {imperial ? undefined : (
+            {tempImperial ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setTempImperial)}
+            disabled={tempImperial}
+          >
             <p>Fahrenheit (˚F)</p>
-            {imperial ? (
+            {tempImperial ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>
+
           <hr className={styles.dropdown__divider} />
+
           <p className={styles.dropdown__title}>Wind Speed</p>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setSpeedImperial)}
+            disabled={!speedImperial}
+          >
             <p>km / h</p>
-            {imperial ? undefined : (
+            {speedImperial ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setSpeedImperial)}
+            disabled={speedImperial}
+          >
             <p>mph</p>
-            {imperial ? (
+            {speedImperial ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>
+
           <hr className={styles.dropdown__divider} />
+
           <p className={styles.dropdown__title}>Precipitation</p>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setPrecipImperial)}
+            disabled={!precipImperial}
+          >
             <p>millimetres (mm)</p>
-            {imperial ? undefined : (
+            {precipImperial ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
-          <button className={styles.dropdown__button}>
+          <button
+            className={styles.dropdown__button}
+            onClick={() => toggleUnits(setPrecipImperial)}
+            disabled={precipImperial}
+          >
             <p>inches (in)</p>
-            {imperial ? (
+            {precipImperial ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>

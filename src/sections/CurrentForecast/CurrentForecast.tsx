@@ -7,7 +7,11 @@ type CurrentForecastProps = {
   forecast: CurrentForecast | undefined;
   locationName: string;
   loading: boolean;
-  imperial: boolean;
+  imperial: {
+    wind: boolean;
+    temp: boolean;
+    rain: boolean;
+  };
 };
 
 export default function CurrentForecast({
@@ -29,7 +33,7 @@ export default function CurrentForecast({
     {
       title: "feels like",
       data: forecast
-        ? `${imperial ? toFahrenheit(forecast?.apparent_temperature) : Math.round(forecast?.apparent_temperature)}˚`
+        ? `${imperial.temp ? toFahrenheit(forecast?.apparent_temperature) : Math.round(forecast?.apparent_temperature)}˚`
         : "-",
     },
     {
@@ -39,7 +43,7 @@ export default function CurrentForecast({
     {
       title: "wind",
       data: forecast
-        ? imperial
+        ? imperial.wind
           ? `${toMph(forecast?.wind_speed_10m)} mph`
           : `${Math.round(forecast?.wind_speed_10m)} km/h`
         : "-",
@@ -47,7 +51,7 @@ export default function CurrentForecast({
     {
       title: "precipitation",
       data: forecast
-        ? imperial
+        ? imperial.rain
           ? `${toInches(forecast.precipitation)} in`
           : `${Math.round(forecast?.precipitation)} mm`
         : "-",
@@ -84,7 +88,7 @@ export default function CurrentForecast({
           )}
           <p>
             {forecast
-              ? imperial
+              ? imperial.temp
                 ? `${toFahrenheit(forecast.temperature_2m)}`
                 : Math.round(forecast.temperature_2m)
               : "-"}
