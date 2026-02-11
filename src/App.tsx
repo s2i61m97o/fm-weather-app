@@ -5,6 +5,7 @@ import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
 import Daily from "./sections/Daily/Daily";
 import {useState} from "react";
 import type {Forecast, Location, ApiError} from "./types";
+import Hourly from "./sections/Hourly/Hourly";
 
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
@@ -31,6 +32,7 @@ function App() {
         loading={loading}
       />
       <Daily forecast={forecastData ? forecastData.daily : undefined} />
+      <Hourly forecast={forecastData ? forecastData.hourly : undefined} />
     </main>
   );
 }

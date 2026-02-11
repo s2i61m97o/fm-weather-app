@@ -1,0 +1,57 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.hourly {
+  background-color: v.$neutral-800;
+  border-radius: v.$r-12;
+  margin-block-start: v.$sp-08;
+  padding: v.$sp-06;
+}
+
+.hourly__header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: v.$sp-04;
+}
+
+.hourly__title {
+  color: v.$neutral-0;
+  @include t.txt-prst-5sb;
+}
+
+.hourly__button {
+  background-color: v.$neutral-600 !important;
+  border-radius: v.$r-8 !important;
+}
+
+.hourly__container {
+  display: grid;
+  gap: v.$sp-04;
+  overflow-y: scroll;
+  max-height: 27.5rem;
+}
+
+.hourly__card {
+  align-items: center;
+  background-color: v.$neutral-700;
+  border: 1px solid v.$neutral-600;
+  border-radius: v.$r-8;
+  color: v.$neutral-0;
+  display: grid;
+  gap: v.$sp-02;
+  grid-template-columns: max-content max-content auto;
+  padding-inline: v.$sp-03;
+  @include t.cardHeader;
+}
+
+.hourly__icon {
+  height: 40px;
+  width: 40px;
+}
+
+.hourly__temp {
+  justify-self: end;
+  @include t.dropdownTitle;
+}

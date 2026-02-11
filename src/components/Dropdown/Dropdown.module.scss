@@ -22,7 +22,6 @@
 .dropdown__content {
   box-sizing: border-box;
   background-color: v.$neutral-800;
-  top: calc(100% + v.$sp-025);
   border-radius: v.$r-12;
   color: v.$neutral-0;
   display: grid;
@@ -33,14 +32,17 @@
   min-width: fit-content;
   overflow: hidden;
   right: 0;
-  padding: 0;
+  opacity: 0;
+  outline: 1px solid v.$neutral-600;
+  padding: v.$sp-015 v.$sp-02;
   position: absolute;
   text-wrap: wrap;
+  top: calc(100% + v.$sp-025);
   width: 100%;
   z-index: 100;
   transition:
-    padding 1ms linear 350ms,
-    height 350ms ease-in;
+    height 350ms ease-in,
+    opacity 1ms linear 350ms;
 
   button {
     cursor: pointer;
@@ -59,10 +61,10 @@
 
 .dropdown__contentOpen {
   height: fit-content;
-  padding: v.$sp-015 v.$sp-02;
+  opacity: 1;
   transform: translateY(0);
   transition:
-    padding 1ms linear,
+    opacity 1ms linear,
     height 350ms ease-in;
 }
 

@@ -14,7 +14,7 @@ export const ICON_CODES = {
   iconOvercast: [3],
   iconFog: [45, 48],
   iconSnow: [71, 73, 75, 77, 85, 86],
-  iconRain: [80, 81, 82],
+  iconRain: [63, 65, 66, 67, 80, 81, 82],
   iconStorm: [95, 96, 99],
 };
 
@@ -28,3 +28,13 @@ export const ICON_SRC = {
   iconStorm: iconStorm,
   iconSunny: iconSunny,
 };
+
+export const DAYS = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];

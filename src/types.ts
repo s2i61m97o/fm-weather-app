@@ -19,7 +19,7 @@ export interface CurrentForecast {
 }
 
 export interface HourForecast {
-  time: string[];
+  time: Date[];
   temperature_2m: number[];
   weather_code: number[];
 }

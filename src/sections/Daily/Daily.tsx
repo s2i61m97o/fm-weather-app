@@ -7,11 +7,8 @@ export default function Daily({
 }: {
   forecast: DailyForecast | undefined;
 }) {
-  console.log(forecast);
-
   const dayCards = forecast?.time.map((time, index) => {
     const date = new Date(time);
-    // const day = date.getDay();
 
     const day = new Intl.DateTimeFormat("en", {weekday: "short"}).format(date);
     const icon = getIcon(forecast.weather_code[index]);
