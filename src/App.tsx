@@ -4,7 +4,7 @@ import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
 import Daily from "./sections/Daily/Daily";
 import {useState} from "react";
-import type {Forecast, Location, ApiError} from "./types";
+import type {Forecast, Location, ErrorRes} from "./types";
 import Hourly from "./sections/Hourly/Hourly";
 import clsx from "clsx";
 
@@ -13,7 +13,7 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState<Location>();
   const [locationName, setLocationName] = useState<string>("-");
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<ApiError | undefined>();
+  const [error, setError] = useState<ErrorRes["error"] | undefined>();
   const [speedImperial, setSpeedImperial] = useState(false);
   const [tempImperial, setTempImperial] = useState(false);
   const [precipImperial, setPrecipImperial] = useState(false);
@@ -37,6 +37,7 @@ function App() {
           setForecastData={setForecastData}
           currentLocation={currentLocation}
           setCurrentLocation={setCurrentLocation}
+          loading={loading}
           setLocationName={setLocationName}
           setLoading={setLoading}
           error={error}

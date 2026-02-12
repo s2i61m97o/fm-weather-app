@@ -40,14 +40,22 @@ export interface Forecast {
   daily: DailyForecast;
 }
 
-export interface ApiError {
-  type: string;
-  status: number;
-  userMessage: string;
-  shouldRetry: boolean;
-  details: string | ErrorMessage | Promise<unknown>;
+export interface SuccessResForecast {
+  success: true;
+  data: Forecast;
+}
+export interface SuccessResLocations {
+  success: true;
+  data: Location[];
 }
 
-export type ErrorMessage = {
-  message: string;
-};
+export interface ErrorRes {
+  success: false;
+  error: {
+    type: string;
+    status: number;
+    userMessage: string;
+    shouldRetry: boolean;
+    details: string | {message: string} | Promise<unknown>;
+  };
+}

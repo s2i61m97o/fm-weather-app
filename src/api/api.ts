@@ -1,4 +1,9 @@
-import type {ApiError, Forecast} from "../types";
+import type {
+  Forecast,
+  SuccessResForecast,
+  ErrorRes,
+  SuccessResLocations,
+} from "../types";
 import {
   GEOCODE_URL,
   FORECAST_URL,
@@ -7,7 +12,9 @@ import {
   STATUS_MAP,
 } from "./constants.ts";
 
-export const getQueryLocations = async (input: string) => {
+export const getQueryLocations = async (
+  input: string,
+): Promise<SuccessResLocations | ErrorRes | undefined> => {
   const searchParams = new URLSearchParams({
     name: input,
     ...QUERY_PARAMS,
@@ -18,9 +25,9 @@ export const getQueryLocations = async (input: string) => {
   try {
     const res = await fetch(requestUrl);
     if (!res.ok) {
-      let errorData: ApiError["details"];
+      let errorData: ErrorRes["error"]["details"];
       try {
-        errorData = res.json();
+        errorData = await res.json();
       } catch {
         errorData = {message: res.statusText};
       }
@@ -65,7 +72,10 @@ export const getQueryLocations = async (input: string) => {
   }
 };
 
-export const queryApiForecast = async (lat: number, long: number) => {
+export const queryApiForecast = async (
+  lat: number,
+  long: number,
+): Promise<SuccessResForecast | ErrorRes | undefined> => {
   const searchParams = new URLSearchParams({
     latitude: lat.toString(),
     longitude: long.toString(),
@@ -77,9 +87,9 @@ export const queryApiForecast = async (lat: number, long: number) => {
   try {
     const res = await fetch(requestUrl);
     if (!res.ok) {
-      let errorData: ApiError["details"];
+      let errorData: ErrorRes["error"]["details"];
       try {
-        errorData = res.json();
+        errorData = await res.json();
       } catch {
         errorData = {message: res.statusText};
       }

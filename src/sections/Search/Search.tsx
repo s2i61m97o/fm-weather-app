@@ -2,7 +2,7 @@ import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
 import useToggle from "../../hooks/useToggle";
-import type {Forecast, Location, ApiError} from "../../types";
+import type {Forecast, Location, ErrorRes} from "../../types";
 import {queryApiForecast, getQueryLocations} from "../../api/api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
@@ -15,9 +15,10 @@ type SearchProps = {
     React.SetStateAction<Location | undefined>
   >;
   setLocationName: React.Dispatch<React.SetStateAction<string>>;
+  loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  error: ApiError | undefined;
-  setError: React.Dispatch<React.SetStateAction<ApiError | undefined>>;
+  error: ErrorRes["error"] | undefined;
+  setError: React.Dispatch<React.SetStateAction<ErrorRes["error"] | undefined>>;
   forecast: boolean;
 };
 
@@ -26,6 +27,7 @@ export default function Search({
   currentLocation,
   setCurrentLocation,
   setLocationName,
+  loading,
   setLoading,
   error,
   setError,
@@ -100,8 +102,7 @@ export default function Search({
       return;
     }
 
-    const lat = currentLocation.latitude;
-    const long = currentLocation.longitude;
+    const {latitude: lat, longitude: long} = currentLocation;
 
     // get forecast
     try {
@@ -173,6 +174,7 @@ export default function Search({
         <button
           className={styles.search__button}
           onClick={(e) => getLocationForecast(e)}
+          disabled={loading}
         >
           Search
         </button>
