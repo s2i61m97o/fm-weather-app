@@ -8,9 +8,9 @@ type CurrentForecastProps = {
   locationName: string;
   loading: boolean;
   imperial: {
-    wind: boolean;
+    speed: boolean;
     temp: boolean;
-    rain: boolean;
+    precipitation: boolean;
   };
 };
 
@@ -43,7 +43,7 @@ export default function CurrentForecast({
     {
       title: "wind",
       data: forecast
-        ? imperial.wind
+        ? imperial.speed
           ? `${toMph(forecast?.wind_speed_10m)} mph`
           : `${Math.round(forecast?.wind_speed_10m)} km/h`
         : "-",
@@ -51,7 +51,7 @@ export default function CurrentForecast({
     {
       title: "precipitation",
       data: forecast
-        ? imperial.rain
+        ? imperial.precipitation
           ? `${toInches(forecast.precipitation)} in`
           : `${Math.round(forecast?.precipitation)} mm`
         : "-",

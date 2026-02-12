@@ -18,19 +18,20 @@ function App() {
   const [tempImperial, setTempImperial] = useState(false);
   const [precipImperial, setPrecipImperial] = useState(false);
 
-  const imperialStates = [speedImperial, tempImperial, precipImperial];
+  const imperial = {
+    speed: speedImperial,
+    temp: tempImperial,
+    precipitation: precipImperial,
+  };
 
   return (
     <>
       <main>
         <Header
-          speedImperial={speedImperial}
           setSpeedImperial={setSpeedImperial}
-          tempImperial={tempImperial}
           setTempImperial={setTempImperial}
-          precipImperial={precipImperial}
           setPrecipImperial={setPrecipImperial}
-          imperialStates={imperialStates}
+          imperial={imperial}
         />
         <Search
           setForecastData={setForecastData}
@@ -48,11 +49,7 @@ function App() {
             locationName={locationName}
             forecast={forecastData ? forecastData.current : undefined}
             loading={loading}
-            imperial={{
-              wind: speedImperial,
-              temp: tempImperial,
-              rain: precipImperial,
-            }}
+            imperial={imperial}
           />
           <Daily
             forecast={forecastData ? forecastData.daily : undefined}

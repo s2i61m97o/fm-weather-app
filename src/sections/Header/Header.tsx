@@ -9,30 +9,34 @@ import checkIcon from "/images/icon-checkmark.svg";
 import clsx from "clsx";
 
 interface HeaderProps {
-  speedImperial: boolean;
   setSpeedImperial: React.Dispatch<React.SetStateAction<boolean>>;
-  tempImperial: boolean;
   setTempImperial: React.Dispatch<React.SetStateAction<boolean>>;
-  precipImperial: boolean;
   setPrecipImperial: React.Dispatch<React.SetStateAction<boolean>>;
-  imperialStates: boolean[];
+  imperial: {
+    speed: boolean;
+    temp: boolean;
+    precipitation: boolean;
+  };
 }
 
 export default function Header({
-  speedImperial,
   setSpeedImperial,
-  tempImperial,
   setTempImperial,
-  precipImperial,
   setPrecipImperial,
-  imperialStates,
+  imperial,
 }: HeaderProps) {
   const [open, toggleOpen] = useToggle();
   function toggleUnits(setFn: React.Dispatch<React.SetStateAction<boolean>>) {
     setFn((prev) => !prev);
   }
 
-  const numOfImperials = imperialStates.filter((state) => state).length;
+  let numOfImperials: number = 0;
+  for (const [, value] of Object.entries(imperial)) {
+    if (value) {
+      numOfImperials++;
+    }
+  }
+
   const toggleAllUnits = () => {
     if (numOfImperials > 1) {
       setPrecipImperial(false);
@@ -64,26 +68,26 @@ export default function Header({
           <button
             className={clsx(
               styles.dropdown__button,
-              !tempImperial && styles.dropdown__buttonActive,
+              !imperial.temp && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setTempImperial)}
-            disabled={!tempImperial}
+            disabled={!imperial.temp}
           >
             <p>Celsius (˚C)</p>
-            {tempImperial ? undefined : (
+            {imperial.temp ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
           <button
             className={clsx(
               styles.dropdown__button,
-              tempImperial && styles.dropdown__buttonActive,
+              imperial.temp && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setTempImperial)}
-            disabled={tempImperial}
+            disabled={imperial.temp}
           >
             <p>Fahrenheit (˚F)</p>
-            {tempImperial ? (
+            {imperial.temp ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>
@@ -94,26 +98,26 @@ export default function Header({
           <button
             className={clsx(
               styles.dropdown__button,
-              !speedImperial && styles.dropdown__buttonActive,
+              !imperial.speed && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setSpeedImperial)}
-            disabled={!speedImperial}
+            disabled={!imperial.speed}
           >
             <p>km / h</p>
-            {speedImperial ? undefined : (
+            {imperial.speed ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
           <button
             className={clsx(
               styles.dropdown__button,
-              speedImperial && styles.dropdown__buttonActive,
+              imperial.speed && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setSpeedImperial)}
-            disabled={speedImperial}
+            disabled={imperial.speed}
           >
             <p>mph</p>
-            {speedImperial ? (
+            {imperial.speed ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>
@@ -124,26 +128,26 @@ export default function Header({
           <button
             className={clsx(
               styles.dropdown__button,
-              !precipImperial && styles.dropdown__buttonActive,
+              !imperial.precipitation && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setPrecipImperial)}
-            disabled={!precipImperial}
+            disabled={!imperial.precipitation}
           >
             <p>millimetres (mm)</p>
-            {precipImperial ? undefined : (
+            {imperial.precipitation ? undefined : (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             )}
           </button>
           <button
             className={clsx(
               styles.dropdown__button,
-              precipImperial && styles.dropdown__buttonActive,
+              imperial.precipitation && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setPrecipImperial)}
-            disabled={precipImperial}
+            disabled={imperial.precipitation}
           >
             <p>inches (in)</p>
-            {precipImperial ? (
+            {imperial.precipitation ? (
               <img src={checkIcon} alt="" className={styles.dropdown__icon} />
             ) : undefined}
           </button>
