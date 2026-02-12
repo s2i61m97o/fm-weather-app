@@ -81,7 +81,7 @@ export default function Hourly({
     .filter((card) =>
       day === today ? card.time >= new Date().getHours() : card,
     )
-    .map((card) => card.element);
+    .map((card, index) => <span key={index}>{card.element}</span>);
 
   function handleClick(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -101,7 +101,17 @@ export default function Hourly({
           </button>
           <DropdownContent open={open}>
             {DAYS.map((day) => {
-              return <button onClick={handleClick}>{day}</button>;
+              return (
+                <button
+                  key={day}
+                  onClick={handleClick}
+                  className={
+                    today === day ? styles.dropdown__itemActive : undefined
+                  }
+                >
+                  {day}
+                </button>
+              );
             })}
           </DropdownContent>
         </Dropdown>

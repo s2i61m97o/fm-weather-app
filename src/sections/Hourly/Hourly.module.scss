@@ -25,8 +25,9 @@
 }
 
 .hourly__button {
-  background-color: v.$neutral-600 !important;
-  border-radius: v.$r-8 !important;
+  background-color: v.$neutral-600;
+  border-radius: v.$r-8;
+  display: flex;
 }
 
 .hourly__container {
@@ -58,4 +59,8 @@
 .hourly__temp {
   justify-self: end;
   @include t.dropdownTitle;
+}
+
+.dropdown__itemActive {
+  background-color: v.$neutral-700;
 }

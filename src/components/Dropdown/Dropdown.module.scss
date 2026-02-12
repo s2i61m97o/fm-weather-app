@@ -45,7 +45,12 @@
     cursor: pointer;
     padding: v.$sp-025 v.$sp-02;
     text-align: left;
+    width: 100%;
     @include t.button;
+
+    &:hover {
+      background-color: v.$neutral-700;
+    }
   }
 
   .dropdown__title {

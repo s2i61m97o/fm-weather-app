@@ -22,7 +22,7 @@ export default function Daily({
       : Math.round(forecast.temperature_2m_min[index]);
 
     return (
-      <div className={styles.daily__card}>
+      <div key={day} className={styles.daily__card}>
         <p>{day}</p>
         <img src={icon} alt="" className={styles.daily__icon} />
         <div className={styles.daily__temp}>
@@ -33,8 +33,8 @@ export default function Daily({
     );
   });
 
-  const emptyCards = new Array(7).fill(0).map(() => {
-    return <div className={styles.daily__card}></div>;
+  const emptyCards = new Array(7).fill(0).map((_value, index) => {
+    return <div key={index} className={styles.daily__card}></div>;
   });
 
   return (
