@@ -18,14 +18,19 @@ type Card = {
 export default function Hourly({
   forecast,
   imperial,
+  timezone,
 }: {
   forecast: HourForecast | undefined;
   imperial: boolean;
+  timezone: string | undefined;
 }) {
   const [open, toggleOpen] = useToggle();
   const [day, setDay] = useState<string>();
 
-  const today = new Date().toLocaleDateString("en", {weekday: "long"});
+  const today = new Date().toLocaleDateString("utc", {
+    weekday: "long",
+    timeZone: timezone,
+  });
 
   //Set using a useEffect so only runs on first render
   useEffect(() => {
@@ -41,11 +46,14 @@ export default function Hourly({
   });
 
   const cards: Card[] = forecast.time.map((time, index) => {
-    const cardDay = new Date(time).toLocaleDateString("en", {weekday: "long"});
+    const cardDay = new Date(time).toLocaleDateString("utc", {
+      weekday: "long",
+      timeZone: timezone,
+    });
     const cardTime = new Date(time);
     const time24hrs = cardTime.getHours();
-    const time12hrs = cardTime.toLocaleTimeString("en", {
-      timeZone: "UTC", // Get timezone for location (in geocoding)
+    const time12hrs = cardTime.toLocaleTimeString("utc", {
+      timeZone: timezone,
       hour12: true,
       hour: "numeric",
     });

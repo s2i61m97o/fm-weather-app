@@ -47,6 +47,7 @@ function App() {
         <section className={clsx("forecasts", !forecastData && "hide")}>
           <CurrentForecast
             locationName={locationName}
+            timezone={currentLocation?.timezone}
             forecast={forecastData ? forecastData.current : undefined}
             loading={loading}
             imperial={imperial}
@@ -58,6 +59,7 @@ function App() {
           <Hourly
             forecast={forecastData ? forecastData.hourly : undefined}
             imperial={tempImperial}
+            timezone={currentLocation?.timezone}
           />
         </section>
       </main>

@@ -6,6 +6,7 @@ import loadingIcon from "/images/icon-loading.svg";
 type CurrentForecastProps = {
   forecast: CurrentForecast | undefined;
   locationName: string;
+  timezone: string | undefined;
   loading: boolean;
   imperial: {
     speed: boolean;
@@ -17,12 +18,14 @@ type CurrentForecastProps = {
 export default function CurrentForecast({
   forecast,
   locationName,
+  timezone,
   loading,
   imperial,
 }: CurrentForecastProps) {
   const iconSrc = getIcon(forecast?.weather_code);
 
   const date = new Date().toLocaleDateString("utc", {
+    timeZone: timezone,
     weekday: "long",
     year: "numeric",
     month: "short",
