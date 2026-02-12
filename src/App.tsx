@@ -3,10 +3,12 @@ import Header from "./sections/Header/Header";
 import Search from "./sections/Search/Search";
 import CurrentForecast from "./sections/CurrentForecast/CurrentForecast";
 import Daily from "./sections/Daily/Daily";
+import Error from "./sections/Error/Error";
 import {useState} from "react";
 import type {Forecast, Location, ErrorRes} from "./types";
 import Hourly from "./sections/Hourly/Hourly";
 import clsx from "clsx";
+import ApiError from "./sections/Error/ApiError";
 
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>();
@@ -33,18 +35,24 @@ function App() {
           setPrecipImperial={setPrecipImperial}
           imperial={imperial}
         />
-        <Search
-          setForecastData={setForecastData}
-          currentLocation={currentLocation}
-          setCurrentLocation={setCurrentLocation}
-          loading={loading}
-          setLocationName={setLocationName}
-          setLoading={setLoading}
-          error={error}
-          setError={setError}
-          forecast={forecastData ? true : false}
-        />
-
+        {error?.status && error?.status >= 400 ? (
+          <ApiError setError={setError} />
+        ) : (
+          <Search
+            setForecastData={setForecastData}
+            currentLocation={currentLocation}
+            setCurrentLocation={setCurrentLocation}
+            loading={loading}
+            setLocationName={setLocationName}
+            setLoading={setLoading}
+            error={error}
+            setError={setError}
+            forecast={forecastData ? true : false}
+          />
+        )}
+        {error?.type === "NO_RESULTS" ? (
+          <Error message={error.userMessage} />
+        ) : undefined}
         <section className={clsx("forecasts", !forecastData && "hide")}>
           <CurrentForecast
             locationName={locationName}

@@ -1,0 +1,47 @@
+@use "../../styles/sass/variables" as v;
+@use "../../styles/sass/breakpoints" as mq;
+@use "../../styles/sass/typography" as t;
+
+.error {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp-06;
+  margin-block: v.$sp-12;
+}
+
+.error__heading {
+  color: v.$neutral-0;
+  text-align: center;
+  text-transform: capitalize;
+  @include t.title;
+}
+
+.error__apiTitle {
+  color: v.$neutral-0;
+  text-align: center;
+  @include t.header;
+}
+
+.error__text {
+  color: v.$neutral-200;
+  text-align: center;
+  max-width: 550px;
+  @include t.input;
+}
+
+.error__icon {
+  height: 50px;
+  width: 50px;
+}
+
+.error__btn {
+  background-color: v.$neutral-800;
+  border-radius: v.$r-8;
+  color: v.$neutral-0;
+  cursor: pointer;
+  display: flex;
+  gap: v.$sp-025;
+  padding: v.$sp-03 v.$sp-04;
+  @include t.dropdownTitle;
+}

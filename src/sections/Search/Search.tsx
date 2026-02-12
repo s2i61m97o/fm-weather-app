@@ -56,6 +56,7 @@ export default function Search({
 
   function handleSelection(e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setError(undefined);
     const locationId = e.currentTarget.id;
     const selectedLocation = queryLocations?.find(
       (location) => location.id.toString() === locationId,
@@ -139,7 +140,12 @@ export default function Search({
   });
 
   return (
-    <section className={clsx(styles.search, !forecast && styles.searchInitial)}>
+    <section
+      className={clsx(
+        styles.search,
+        !forecast && !error && styles.searchInitial,
+      )}
+    >
       <h1 className={styles.search__header}>How's the sky looking today?</h1>
       <form action="get" className={styles.search__form}>
         <Dropdown>
@@ -148,7 +154,7 @@ export default function Search({
               error?.type === "EMPTY_INPUT" && styles.search__error,
             )}
           >
-            {error?.userMessage}
+            {error?.type === "EMPTY_INPUT" && error?.userMessage}
           </p>
           <div className={styles.search__wrapper}>
             <input
