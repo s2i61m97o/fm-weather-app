@@ -19,10 +19,11 @@
     background-image: url(/images/bg-today-large.svg);
   }
   @include mq.md {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: v.$sp-20 v.$sp-06;
+    // align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    // justify-content: space-between;
+    padding: v.$sp-20 v.$sp-06 v.$sp-10;
     text-align: left;
   }
 
@@ -105,4 +106,18 @@
     color: v.$neutral-0;
     @include t.cardData;
   }
+}
+
+.forecast__sunContainer {
+  display: flex;
+  grid-area: 2 / 1 / 3 / 3;
+  justify-content: space-between;
+  @include t.dropdownTitle;
+}
+
+.forecast__sun {
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp-015;
+  align-items: center;
 }

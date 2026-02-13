@@ -6,7 +6,7 @@ export default function Daily({
   forecast,
   imperial,
 }: {
-  forecast: DailyForecast | undefined;
+  forecast: DailyForecast;
   imperial: boolean;
 }) {
   const dayCards = forecast?.time.map((time, index) => {

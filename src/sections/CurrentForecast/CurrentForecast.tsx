@@ -2,9 +2,10 @@ import styles from "./CurrentForecast.module.scss";
 import type {CurrentForecast} from "../../types";
 import {getIcon, toFahrenheit, toInches, toMph} from "../../utils";
 import loadingIcon from "/images/icon-loading.svg";
+import {FiSunrise, FiSunset} from "react-icons/fi";
 
 type CurrentForecastProps = {
-  forecast: CurrentForecast | undefined;
+  forecast: CurrentForecast;
   locationName: string;
   timezone: string | undefined;
   loading: boolean;
@@ -12,6 +13,10 @@ type CurrentForecastProps = {
     speed: boolean;
     temp: boolean;
     precipitation: boolean;
+  };
+  sun: {
+    sunrise: string[];
+    sunset: string[];
   };
 };
 
@@ -21,6 +26,7 @@ export default function CurrentForecast({
   timezone,
   loading,
   imperial,
+  sun,
 }: CurrentForecastProps) {
   const iconSrc = getIcon(forecast?.weather_code);
 
@@ -31,6 +37,17 @@ export default function CurrentForecast({
     month: "short",
     day: "numeric",
   });
+
+  const sunTime = {
+    sunrise: new Date(sun.sunrise[0]).toLocaleTimeString("utc", {
+      timeZone: timezone,
+      timeStyle: "short",
+    }),
+    sunset: new Date(sun.sunset[0]).toLocaleTimeString("utc", {
+      timeZone: timezone,
+      timeStyle: "short",
+    }),
+  };
 
   const cardData = [
     {
@@ -97,6 +114,16 @@ export default function CurrentForecast({
               : "-"}
             ˚
           </p>
+        </div>
+        <div className={styles.forecast__sunContainer}>
+          <div className={styles.forecast__sun}>
+            <FiSunrise color="ff7a0a" />
+            <p>{sunTime.sunrise}</p>
+          </div>
+          <div className={styles.forecast__sun}>
+            <FiSunset color="ff7a0a" />
+            <p>{sunTime.sunset}</p>
+          </div>
         </div>
       </div>
       <div className={styles.forecast__container}>{cards}</div>

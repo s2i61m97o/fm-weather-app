@@ -83,7 +83,7 @@ export const queryApiForecast = async (
   });
 
   const requestUrl = FORECAST_URL + searchParams;
-
+  console.log(requestUrl);
   try {
     const res = await fetch(requestUrl);
     if (!res.ok) {

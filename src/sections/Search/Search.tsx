@@ -9,7 +9,7 @@ import clsx from "clsx";
 import useClickOutside from "../../hooks/useClickOutside";
 
 type SearchProps = {
-  setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
+  setForecastData: React.Dispatch<React.SetStateAction<Forecast>>;
   currentLocation: Location | undefined;
   setCurrentLocation: React.Dispatch<
     React.SetStateAction<Location | undefined>

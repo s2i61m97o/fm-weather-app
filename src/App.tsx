@@ -9,9 +9,10 @@ import type {Forecast, Location, ErrorRes} from "./types";
 import Hourly from "./sections/Hourly/Hourly";
 import clsx from "clsx";
 import ApiError from "./sections/Error/ApiError";
+import {emptyForecast} from "./constraints";
 
 function App() {
-  const [forecastData, setForecastData] = useState<Forecast>();
+  const [forecastData, setForecastData] = useState<Forecast>(emptyForecast);
   const [currentLocation, setCurrentLocation] = useState<Location>();
   const [locationName, setLocationName] = useState<string>("-");
   const [loading, setLoading] = useState<boolean>(false);
@@ -47,24 +48,31 @@ function App() {
             setLoading={setLoading}
             error={error}
             setError={setError}
-            forecast={forecastData ? true : false}
+            forecast={forecastData !== emptyForecast ? true : false}
           />
         )}
         {error?.type === "NO_RESULTS" ? (
           <Error message={error.userMessage} />
         ) : undefined}
-        <section className={clsx("forecasts", !forecastData && "hide")}>
+
+        <section
+          className={clsx(
+            "forecasts",
+            forecastData === emptyForecast && "hide",
+          )}
+        >
           <CurrentForecast
             locationName={locationName}
             timezone={currentLocation?.timezone}
-            forecast={forecastData ? forecastData.current : undefined}
+            forecast={forecastData.current}
+            sun={{
+              sunrise: forecastData.daily.sunrise,
+              sunset: forecastData.daily.sunset,
+            }}
             loading={loading}
             imperial={imperial}
           />
-          <Daily
-            forecast={forecastData ? forecastData.daily : undefined}
-            imperial={tempImperial}
-          />
+          <Daily forecast={forecastData.daily} imperial={tempImperial} />
           <Hourly
             forecast={forecastData ? forecastData.hourly : undefined}
             imperial={tempImperial}
