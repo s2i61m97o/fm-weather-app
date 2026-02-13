@@ -26,8 +26,6 @@ function App() {
     precipitation: precipImperial,
   };
 
-  console.log(forecastData);
-
   return (
     <>
       <main>

@@ -40,19 +40,18 @@ export default function Search({
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
       const {latitude, longitude} = position.coords;
-      console.log(latitude, longitude);
       const getUserLocationForecast = async () => {
         const res = await queryApiForecast(latitude, longitude);
         if (!res || !res.success) {
           return;
         }
         const data = res.data;
-        console.log("data: " + data);
         setForecastData(data);
       };
-
       getUserLocationForecast();
+      setLocationName("Current Location");
     });
   }, []);
 

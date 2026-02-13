@@ -43,18 +43,6 @@ export const getQueryLocations = async (
       };
     }
     const data = await res.json();
-    // if (!data.results && input.length > 3) {
-    //   return {
-    //     success: false,
-    //     error: {
-    //       type: "NO_RESULTS",
-    //       status: res.status,
-    //       userMessage: "No search results found",
-    //       shouldRetry: res.status >= 500,
-    //       details: "no results for location",
-    //     },
-    //   };
-    // }
     return {success: true, data: data.results};
   } catch (err) {
     if (err instanceof SyntaxError) {
