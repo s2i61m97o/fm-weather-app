@@ -1,5 +1,5 @@
 import styles from "./Search.module.scss";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
 import type {Forecast, Location, ErrorRes} from "../../types";
 import {queryApiForecast, getQueryLocations} from "../../api/api";
@@ -36,7 +36,6 @@ export default function Search({
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState<string>("");
   const [queryLocations, setQueryLocations] = useState<Location[]>([]);
-
   const [dropdownRef, controlRef] = useClickOutside<HTMLInputElement>(setOpen);
 
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
@@ -46,6 +45,21 @@ export default function Search({
       setOpen(true);
     } else if (open && query.length === 0) {
       setOpen(false);
+    }
+
+    if (queryLocations) {
+      setError(undefined);
+    }
+
+    if (query.length > 3 && !queryLocations) {
+      setOpen(false);
+      setError({
+        type: "NO_RESULTS",
+        status: 0,
+        userMessage: "No search results found",
+        shouldRetry: false,
+        details: "Location not found",
+      });
     }
 
     const locations = await getQueryLocations(query);
@@ -96,11 +110,11 @@ export default function Search({
     // Case nothing selected from dropdown
     if (!currentLocation) {
       setError({
-        type: "EMPTY_INPUT",
+        type: "EMPTY_SELECTION",
         status: 0,
-        userMessage: "Please select a location from the dropdown",
+        userMessage: "No search results found",
         shouldRetry: false,
-        details: "empty input on submit",
+        details: "No location selected from dropdown",
       });
       return;
     }
@@ -178,9 +192,9 @@ export default function Search({
           <DropdownContent open={open} ref={dropdownRef}>
             {dropdownContent ? (
               dropdownContent
-            ) : (
+            ) : query.length < 4 ? (
               <button disabled>Searching for locations</button>
-            )}
+            ) : undefined}
           </DropdownContent>
         </Dropdown>
         <button
