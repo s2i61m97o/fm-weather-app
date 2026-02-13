@@ -40,7 +40,6 @@ export default function Search({
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
       const {latitude, longitude} = position.coords;
       const getUserLocationForecast = async () => {
         const res = await queryApiForecast(latitude, longitude);

@@ -42,7 +42,7 @@
 .search__wrapper {
   position: relative;
   &::before {
-    content: url(images/icon-search.svg);
+    content: url(/images/icon-search.svg);
     color: v.$neutral-200;
     position: absolute;
     top: v.$sp-045;

@@ -7,7 +7,7 @@
 }
 
 .forecast__weatherInfo {
-  background-image: url(images/bg-today-small.svg);
+  background-image: url(/images/bg-today-small.svg);
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: v.$r-20;
@@ -16,7 +16,7 @@
   text-align: center;
   z-index: -1;
   @include mq.sm {
-    background-image: url(images/bg-today-large.svg);
+    background-image: url(/images/bg-today-large.svg);
   }
   @include mq.md {
     align-items: center;
