@@ -38,6 +38,24 @@ export default function Search({
   const [queryLocations, setQueryLocations] = useState<Location[]>([]);
   const [dropdownRef, controlRef] = useClickOutside<HTMLInputElement>(setOpen);
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const {latitude, longitude} = position.coords;
+      console.log(latitude, longitude);
+      const getUserLocationForecast = async () => {
+        const res = await queryApiForecast(latitude, longitude);
+        if (!res || !res.success) {
+          return;
+        }
+        const data = res.data;
+        console.log("data: " + data);
+        setForecastData(data);
+      };
+
+      getUserLocationForecast();
+    });
+  }, []);
+
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const query = e.currentTarget.value;
     setQuery(query);
