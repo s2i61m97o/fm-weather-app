@@ -1,13 +1,13 @@
 import Dropdown from "../../components/Dropdown/Dropdown";
 import type {HourForecast} from "../../types";
 import styles from "./Hourly.module.scss";
-import useToggle from "../../hooks/useToggle";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import {useEffect, useState, type JSX} from "react";
 import {getIcon, toFahrenheit} from "../../utils";
 import type {MouseEvent} from "react";
 import {DAYS} from "../../constraints";
 import dropdownIcon from "/images/icon-dropdown.svg";
+import useClickOutside from "../../hooks/useClickOutside";
 
 type Card = {
   day: string;
@@ -24,8 +24,10 @@ export default function Hourly({
   imperial: boolean;
   timezone: string | undefined;
 }) {
-  const [open, toggleOpen] = useToggle();
+  const [open, setOpen] = useState(false);
   const [day, setDay] = useState<string>();
+
+  const [dropdownRef, controlRef] = useClickOutside<HTMLButtonElement>(setOpen);
 
   const today = new Date().toLocaleDateString("utc", {
     weekday: "long",
@@ -87,7 +89,7 @@ export default function Hourly({
     e.preventDefault();
     const value = e.currentTarget.textContent;
     setDay(value);
-    toggleOpen();
+    setOpen(false);
   }
 
   return (
@@ -95,11 +97,15 @@ export default function Hourly({
       <div className={styles.hourly__header}>
         <h3 className={styles.hourly__title}>Hourly forecast</h3>
         <Dropdown>
-          <button onClick={toggleOpen} className={styles.hourly__button}>
+          <button
+            onClick={() => setOpen((prev) => !prev)}
+            className={styles.hourly__button}
+            ref={controlRef}
+          >
             {day}
             <img src={dropdownIcon} alt="" />
           </button>
-          <DropdownContent open={open}>
+          <DropdownContent open={open} ref={dropdownRef}>
             {DAYS.map((day) => {
               return (
                 <button

@@ -1,12 +1,12 @@
 import styles from "./Search.module.scss";
 import {useState} from "react";
 import type {ChangeEvent, MouseEvent} from "react";
-import useToggle from "../../hooks/useToggle";
 import type {Forecast, Location, ErrorRes} from "../../types";
 import {queryApiForecast, getQueryLocations} from "../../api/api";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import DropdownContent from "../../components/Dropdown/DropdownContent";
 import clsx from "clsx";
+import useClickOutside from "../../hooks/useClickOutside";
 
 type SearchProps = {
   setForecastData: React.Dispatch<React.SetStateAction<Forecast | undefined>>;
@@ -33,17 +33,19 @@ export default function Search({
   setError,
   forecast,
 }: SearchProps) {
-  const [open, toggleOpen] = useToggle();
+  const [open, setOpen] = useState(false);
   const [query, setQuery] = useState<string>("");
   const [queryLocations, setQueryLocations] = useState<Location[]>([]);
+
+  const [dropdownRef, controlRef] = useClickOutside<HTMLInputElement>(setOpen);
 
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const query = e.currentTarget.value;
     setQuery(query);
     if (!open) {
-      toggleOpen();
+      setOpen(true);
     } else if (open && query.length === 0) {
-      toggleOpen();
+      setOpen(false);
     }
 
     const locations = await getQueryLocations(query);
@@ -66,7 +68,7 @@ export default function Search({
     );
     setCurrentLocation(selectedLocation);
     if (open) {
-      toggleOpen();
+      setOpen(false);
     }
   }
 
@@ -74,7 +76,7 @@ export default function Search({
     e.preventDefault();
     // Close dropdown menu, set loading state
     if (open) {
-      toggleOpen();
+      setOpen(false);
     }
     setLoading(true);
 
@@ -127,6 +129,9 @@ export default function Search({
     if (error?.type === "EMPTY_INPUT") {
       setError(undefined);
     }
+    if (query) {
+      setOpen(true);
+    }
   }
 
   const dropdownContent = queryLocations?.map((location: Location) => {
@@ -166,10 +171,11 @@ export default function Search({
               onChange={handleInput}
               value={query}
               onFocus={handleFocus}
+              ref={controlRef}
             />
           </div>
 
-          <DropdownContent open={open}>
+          <DropdownContent open={open} ref={dropdownRef}>
             {dropdownContent ? (
               dropdownContent
             ) : (

@@ -5,9 +5,11 @@ import clsx from "clsx";
 export default function DropdownContent({
   children,
   open,
+  ref,
 }: {
   children?: JSX.Element | JSX.Element[];
   open: boolean;
+  ref: React.Ref<HTMLDivElement | null>;
 }) {
   return (
     <div
@@ -15,6 +17,7 @@ export default function DropdownContent({
         styles.dropdown__content,
         open && styles.dropdown__contentOpen,
       )}
+      ref={ref}
     >
       {children}
     </div>

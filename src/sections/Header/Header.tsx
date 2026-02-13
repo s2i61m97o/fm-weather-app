@@ -4,9 +4,10 @@ import DropdownContent from "../../components/Dropdown/DropdownContent";
 import unitsIcon from "/images/icon-units.svg";
 import dropdownIcon from "/images/icon-dropdown.svg";
 import styles from "./Header.module.scss";
-import useToggle from "../../hooks/useToggle";
 import checkIcon from "/images/icon-checkmark.svg";
 import clsx from "clsx";
+import {useState} from "react";
+import useClickOutside from "../../hooks/useClickOutside";
 
 interface HeaderProps {
   setSpeedImperial: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,10 +26,12 @@ export default function Header({
   setPrecipImperial,
   imperial,
 }: HeaderProps) {
-  const [open, toggleOpen] = useToggle();
+  const [open, setOpen] = useState<boolean>(false);
   function toggleUnits(setFn: React.Dispatch<React.SetStateAction<boolean>>) {
     setFn((prev) => !prev);
   }
+
+  const [dropdownRef, controlRef] = useClickOutside<HTMLButtonElement>(setOpen);
 
   let numOfImperials: number = 0;
   for (const [, value] of Object.entries(imperial)) {
@@ -53,12 +56,16 @@ export default function Header({
     <header className={styles.header}>
       <img className={styles.header__logo} src={logo} alt="Weather Now Logo" />
       <Dropdown>
-        <button onClick={toggleOpen} className={styles.header__button}>
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className={styles.header__button}
+          ref={controlRef}
+        >
           <img src={unitsIcon} alt="" />
           Units
           <img src={dropdownIcon} alt="" />
         </button>
-        <DropdownContent open={open}>
+        <DropdownContent open={open} ref={dropdownRef}>
           <button className={styles.dropdown__switch} onClick={toggleAllUnits}>
             Switch to
             {numOfImperials > 1 ? " Metric" : " Imperial"}
