@@ -28,13 +28,26 @@
   background-color: v.$neutral-600;
   border-radius: v.$r-8;
   display: flex;
+
+  &:focus,
+  &:focus-visible {
+    outline: 2px solid v.$neutral-0;
+    outline-offset: 3px;
+  }
 }
 
 .hourly__container {
+  border-radius: v.$r-8;
   display: grid;
   gap: v.$sp-04;
   overflow-y: scroll;
   max-height: calc((8 * v.$sp-16) + (8 * v.$sp-04));
+
+  &:focus,
+  &:focus-visible {
+    outline: 1px solid v.$neutral-0;
+    outline-offset: 1px;
+  }
 }
 
 .hourly__card {

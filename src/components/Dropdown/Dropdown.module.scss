@@ -51,6 +51,12 @@
     &:hover {
       background-color: v.$neutral-700;
     }
+
+    &:focus,
+    &:focus-visible {
+      outline: 1px solid v.$neutral-0;
+      outline-offset: 1px;
+    }
   }
 
   .dropdown__title {
@@ -110,7 +116,8 @@
     text-transform: none;
   }
 
-  &:focus {
+  &:focus,
+  &:focus-visible {
     outline: v.$sp-005 solid v.$neutral-0;
     outline-offset: 3px;
   }
