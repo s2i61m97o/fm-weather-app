@@ -40,8 +40,21 @@
   border-radius: v.$r-8;
   display: grid;
   gap: v.$sp-04;
-  overflow-y: scroll;
   max-height: calc((8 * v.$sp-16) + (8 * v.$sp-04));
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: v.$sp-005;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: v.$r-4;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: v.$neutral-0;
+    border-radius: v.$r-4;
+  }
 
   &:focus,
   &:focus-visible {
