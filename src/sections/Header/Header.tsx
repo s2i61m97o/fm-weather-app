@@ -60,6 +60,7 @@ export default function Header({
           onClick={() => setOpen((prev) => !prev)}
           className={styles.header__button}
           ref={controlRef}
+          aria-expanded={open}
         >
           <img src={unitsIcon} alt="" />
           Units
@@ -71,7 +72,9 @@ export default function Header({
             {numOfImperials > 1 ? " Metric" : " Imperial"}
           </button>
 
-          <p className={styles.dropdown__title}>Temperature</p>
+          <p id="temperature" className={styles.dropdown__title}>
+            Temperature
+          </p>
           <button
             className={clsx(
               styles.dropdown__button,
@@ -138,6 +141,7 @@ export default function Header({
               !imperial.precipitation && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setPrecipImperial)}
+            onBlur={() => setOpen(false)}
             disabled={!imperial.precipitation}
           >
             <p>millimetres (mm)</p>
@@ -151,6 +155,7 @@ export default function Header({
               imperial.precipitation && styles.dropdown__buttonActive,
             )}
             onClick={() => toggleUnits(setPrecipImperial)}
+            onBlur={() => setOpen(false)}
             disabled={imperial.precipitation}
           >
             <p>inches (in)</p>

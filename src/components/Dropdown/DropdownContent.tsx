@@ -18,6 +18,7 @@ export default function DropdownContent({
         open && styles.dropdown__contentOpen,
       )}
       ref={ref}
+      inert={!open}
     >
       {children}
     </div>

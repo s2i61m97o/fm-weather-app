@@ -101,12 +101,27 @@ export default function Hourly({
             onClick={() => setOpen((prev) => !prev)}
             className={styles.hourly__button}
             ref={controlRef}
+            aria-expanded={open}
           >
             {day}
             <img src={dropdownIcon} alt="" />
           </button>
           <DropdownContent open={open} ref={dropdownRef}>
-            {DAYS.map((day) => {
+            {DAYS.map((day, index) => {
+              if (index === DAYS.length - 1) {
+                return (
+                  <button
+                    key={day}
+                    onClick={handleClick}
+                    className={
+                      today === day ? styles.dropdown__itemActive : undefined
+                    }
+                    onBlur={() => setOpen(false)}
+                  >
+                    {day}
+                  </button>
+                );
+              }
               return (
                 <button
                   key={day}

@@ -185,6 +185,7 @@ export default function Search({
       <form action="get" className={styles.search__form}>
         <Dropdown>
           <p
+            id="error-msg"
             className={clsx(
               error?.type === "EMPTY_INPUT" && styles.search__error,
             )}
@@ -202,6 +203,8 @@ export default function Search({
               value={query}
               onFocus={handleFocus}
               ref={controlRef}
+              aria-invalid={error?.type === "EMPTY_INPUT"}
+              aria-describedby="error-msg"
             />
           </div>
 
