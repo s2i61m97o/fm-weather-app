@@ -3,9 +3,11 @@
 @use "../../styles/sass/typography" as t;
 
 .search {
+  position: relative;
   text-align: center;
   transform: translate(0);
   transition: all 250ms ease-in;
+  z-index: v.$z-dropdown;
 }
 
 .searchInitial {

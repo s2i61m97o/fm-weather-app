@@ -118,11 +118,17 @@ export default function CurrentForecast({
         <div className={styles.forecast__sunContainer}>
           <div className={styles.forecast__sun}>
             <FiSunrise color="ff7a0a" />
-            <p>{sunTime.sunrise}</p>
+            <p aria-labelledby="sunrise">{sunTime.sunrise}</p>
+            <div id="sunrise" className={styles.forecast__tooltip}>
+              Sunrise Time
+            </div>
           </div>
           <div className={styles.forecast__sun}>
             <FiSunset color="ff7a0a" />
-            <p>{sunTime.sunset}</p>
+            <p aria-labelledby="sunset">{sunTime.sunset}</p>
+            <div id="sunset" className={styles.forecast__tooltip}>
+              Sunset Time
+            </div>
           </div>
         </div>
       </div>

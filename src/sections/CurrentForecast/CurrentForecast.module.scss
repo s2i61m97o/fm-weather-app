@@ -4,6 +4,7 @@
 
 .forecast {
   color: v.$neutral-0;
+  // z-index: 20;
 }
 
 .forecast__weatherInfo {
@@ -14,15 +15,12 @@
   padding: v.$sp-06;
   position: relative;
   text-align: center;
-  z-index: -1;
   @include mq.sm {
     background-image: url(/images/bg-today-large.svg);
   }
   @include mq.md {
-    // align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    // justify-content: space-between;
     padding: v.$sp-20 v.$sp-06 v.$sp-10;
     text-align: left;
   }
@@ -116,8 +114,27 @@
 }
 
 .forecast__sun {
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: v.$sp-015;
-  align-items: center;
+  position: relative;
+
+  &:hover {
+    .forecast__tooltip {
+      opacity: 1;
+    }
+  }
+  .forecast__tooltip {
+    background-color: v.$neutral-800;
+    border-radius: v.$r-8;
+    top: 120%;
+    color: v.$neutral-200;
+    opacity: 0;
+    padding: v.$sp-01;
+    position: absolute;
+    text-wrap: nowrap;
+    width: fit-content;
+    @include t.dropdownTitle;
+  }
 }

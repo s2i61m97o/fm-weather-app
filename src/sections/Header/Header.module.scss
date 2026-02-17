@@ -7,6 +7,8 @@
   display: flex;
   justify-content: space-between;
   margin-block-start: clamp(v.$sp-04, 0.5229rem + 2.0356vw, v.$sp-06);
+  position: relative;
+  z-index: v.$z-popover;
   @include mq.md {
     margin-block-start: clamp(v.$sp-06, -0.2143rem + 3.5714vw, v.$sp-12);
   }

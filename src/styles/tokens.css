@@ -80,4 +80,11 @@
 
   --font-primary: "DM Sans", sans-serif;
   --font-secondary: "Bricolage Grotesque", sans-serif;
+
+  /* Z-Index */
+
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-popover: 1500;
+  --z-tooltip: 1600;
 }
