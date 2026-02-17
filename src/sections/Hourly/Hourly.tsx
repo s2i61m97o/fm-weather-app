@@ -5,7 +5,7 @@ import DropdownContent from "../../components/Dropdown/DropdownContent";
 import {useEffect, useState, type JSX} from "react";
 import {getIcon, toFahrenheit} from "../../utils";
 import type {MouseEvent} from "react";
-import {DAYS} from "../../constraints";
+import {DAYS} from "../../constants";
 import dropdownIcon from "/images/icon-dropdown.svg";
 import useClickOutside from "../../hooks/useClickOutside";
 

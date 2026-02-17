@@ -9,7 +9,7 @@ import type {Forecast, Location, ErrorRes} from "./types";
 import Hourly from "./sections/Hourly/Hourly";
 import clsx from "clsx";
 import ApiError from "./sections/Error/ApiError";
-import {emptyForecast} from "./constraints";
+import {emptyForecast} from "./constants";
 
 function App() {
   const [forecastData, setForecastData] = useState<Forecast>(emptyForecast);

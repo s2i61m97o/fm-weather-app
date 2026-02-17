@@ -69,6 +69,17 @@ export const getQueryLocations = async (
         },
       };
     }
+
+    return {
+      success: false,
+      error: {
+        type: "UNKNOWN_ERROR",
+        status: 0,
+        userMessage: "An unknown error occurred",
+        shouldRetry: true,
+        details: `Unknown error: ${requestUrl}, @ ${new Date().toISOString()}`,
+      },
+    };
   }
 };
 
@@ -83,7 +94,6 @@ export const queryApiForecast = async (
   });
 
   const requestUrl = FORECAST_URL + searchParams;
-  console.log(requestUrl);
   try {
     const res = await fetch(requestUrl);
     if (!res.ok) {
@@ -131,5 +141,15 @@ export const queryApiForecast = async (
         },
       };
     }
+    return {
+      success: false,
+      error: {
+        type: "UNKNOWN_ERROR",
+        status: 0,
+        userMessage: "An unknown error occurred",
+        shouldRetry: true,
+        details: `Unknown error: ${requestUrl}, @ ${new Date().toISOString()}`,
+      },
+    };
   }
 };
