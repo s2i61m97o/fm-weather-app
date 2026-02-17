@@ -10,9 +10,9 @@ This is a solution to the [Weather app challenge on Frontend Mentor](https://www
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
+    <!-- - [What I learned](#what-i-learned) -->
+    <!-- - [Continued development](#continued-development) -->
+    <!-- - [Useful resources](#useful-resources) -->
 - [Author](#author)
 
 ## Overview
@@ -34,12 +34,12 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![Completed site screenshot](./public/images/completed-screenshot.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- [Github Repository](https://github.com/s2i61m97o/fm-weather-app)
+- [Live Site](https://weather-app-s2i61m97o.netlify.app/)
 
 ## My process
 
@@ -51,14 +51,14 @@ Users should be able to:
 - CSS Grid
 - SASS
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+- React
 - TypeScript
 
-### What I learned
+<!-- ### What I learned -->
 
-### Continued development
+<!-- ### Continued development -->
 
-### Useful resources
+<!-- ### Useful resources -->
 
 ## Author
 
